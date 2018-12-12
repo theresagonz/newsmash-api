@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/Search';
 
 class App extends Component {
-  // let users;
-  fetchUsers = () => {
-    return fetch(`/api/users`)
-      .then(users => users.json)
-      .then(data => data);
-  }
-
-
   render() {
     return (
       <div className="App">
-
+        <Search />
       </div>
     );
   }
