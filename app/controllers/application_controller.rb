@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
   def index
-    render 'layouts/index'
+    render 'app/index'
   end
 end

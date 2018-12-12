@@ -18,12 +18,17 @@ export default class Search extends Component {
   render() {
     return (
       <form>
-        <input
-          type="text"
-          value={this.state.text}
-          onChange={this.handleChange}
-        />
-        <input type="submit" />
+        <div className="form-group">
+        <label for="search_input">Search headlines</label>
+          <input
+            id="search_input"
+            type="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+            className="form-control"
+          />
+          <button type="button" className="btn btn-primary" >Submit</button>
+        </div>
       </form>
     )
   }
