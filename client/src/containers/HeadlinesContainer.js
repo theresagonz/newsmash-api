@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../components/Search';
+import { fetchHeadlines } from '../actions/headlineActions'
 
 class HeadlinesContainer extends Component {
 
@@ -16,7 +17,8 @@ class HeadlinesContainer extends Component {
 // })
 
 const mapDispatchToProps = dispatch => ({
-  fetchHeadlines: text => dispatch({ type: 'FETCH_HEADLINES', payload: text })
+
+  fetchHeadlines: text => dispatch(fetchHeadlines)
 });
 
 export default connect(null, mapDispatchToProps)(HeadlinesContainer);
