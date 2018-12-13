@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
-import Search from './components/Search';
 import Navbar from './components/Navbar';
-
-import { MenuItem, Jumbotron, Button } from 'react-bootstrap';
-import HeadlinesContainer from './containers/HeadlinesContainer';
+import StoriesContainer from './containers/StoriesContainer';
 
 const App = () => {
   return (
       <div className="App">
         <Navbar />
-        <HeadlinesContainer />
+        <StoriesContainer />
       </div>
   );
 }

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import headlinesReducer from './headlinesReducer';
+import storiesReducer from './storiesReducer';
 
 const rootReducer = combineReducers({
-  headlines: headlinesReducer
+  stories: storiesReducer
 });
 export default rootReducer;
