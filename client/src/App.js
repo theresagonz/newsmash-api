@@ -7,13 +7,13 @@ import Search from './components/Search';
 import Navbar from './components/Navbar';
 
 import { MenuItem, Jumbotron, Button } from 'react-bootstrap';
+import HeadlinesContainer from './containers/HeadlinesContainer';
 
 const App = () => {
   return (
       <div className="App">
         <Navbar />
-        <h1>Hello!</h1>
-        <Search />
+        <HeadlinesContainer />
       </div>
   );
 }

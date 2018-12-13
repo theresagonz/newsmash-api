@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 export default class Search extends Component {
   constructor() {
@@ -15,9 +16,17 @@ export default class Search extends Component {
     })
   }
 
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.fetchHeadlines(this.state.text);
+    this.setState({
+      text: ''
+    })
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
         <label for="search_input">Search headlines</label>
           <input

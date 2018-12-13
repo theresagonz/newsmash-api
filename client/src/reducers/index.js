@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import wordsReducer from './wordsReducer';
+import headlinesReducer from './headlinesReducer';
 
 const rootReducer = combineReducers({
-  words: wordsReducer
+  headlines: headlinesReducer
 });
 export default rootReducer;

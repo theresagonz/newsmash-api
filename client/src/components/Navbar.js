@@ -5,8 +5,9 @@ const Navbar = () => {
     <div className="navbar">
       <nav>
         <div className="navbar-text">
-          <a href="/">Home</a>
-          <a href="/app/">About</a>
+          <p className="navbar-text">News Wiz</p>
+          {/* <a href="/">Home</a>
+          <a href="/app/">About</a> */}
         </div>
       </nav>
     </div>
