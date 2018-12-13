@@ -35,7 +35,7 @@ export default class Search extends Component {
             onChange={this.handleChange}
             className="form-control"
           />
-          <button type="button" className="btn btn-primary" >Submit</button>
+          <input type="submit" className="btn btn-primary" value="Get headlines" />
         </div>
       </form>
     )

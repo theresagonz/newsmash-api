@@ -17,7 +17,7 @@ class StoriesContainer extends Component {
 // })
 
 const mapDispatchToProps = dispatch => ({
-  fetchStoriesBySearch: text => dispatch(fetchStoriesBySearch)
+  fetchStoriesBySearch: text => dispatch(fetchStoriesBySearch(text))
 });
 
 export default connect(null, mapDispatchToProps)(StoriesContainer);
