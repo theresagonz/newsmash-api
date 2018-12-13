@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../components/Search';
 import { fetchStoriesBySearch } from '../actions/storiesActions';
+import Stories from '../components/Stories';
 
 class StoriesContainer extends Component {
 
   render() {
     return (
-      <Search fetchStoriesBySearch={this.props.fetchStoriesBySearch} />
+      <div>
+        <Search fetchStoriesBySearch={this.props.fetchStoriesBySearch} />
+        <Stories stories={this.props.stories} />
+      </div>
     )
   }
 }
 
-// const mapStateToProps = state => ({
-//   searchText: state.searchText
-// })
+const mapStateToProps = state => ({
+  stories: state.stories.stories
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchStoriesBySearch: text => dispatch(fetchStoriesBySearch(text))
 });
 
-export default connect(null, mapDispatchToProps)(StoriesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StoriesContainer);
