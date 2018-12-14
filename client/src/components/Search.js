@@ -27,15 +27,15 @@ export default class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-        <label for="search_input">Search headlines</label>
+          {/* <label for="search_input">Search headlines</label> */}
           <input
             id="search_input"
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
-            className="form-control"
+            // className="form-control"
           />
-          <input type="submit" className="btn btn-primary" value="Get headlines" />
+        <input type="submit" className="btn btn-primary" value="Get headlines" />
         </div>
       </form>
     )

@@ -30,3 +30,17 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 35px 100px;
+  color: #343a41;
+  background-color: rgb(186, 240, 201);
+}
+
+.container {
+  display: flex;
+}
+
+a:hover, a:visited, a:link, a:active {
+   text-decoration: none;
+}
