@@ -17,7 +17,7 @@ export default class Search extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.fetchStories(this.state.text);
+    this.props.fetchStoriesBySearch(this.state.text);
     this.setState({
       text: ''
     });
