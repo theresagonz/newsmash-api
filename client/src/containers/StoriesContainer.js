@@ -7,16 +7,10 @@ import Stories from '../components/Stories';
 class StoriesContainer extends Component {
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/v1/stories')
-      .then(response => response.json())
-      .then(data => {
-        console.log('stories', data)
-        fetchStories(data)
-      }); 
+    fetchStories();
   }
 
   render() {
-    console.log('in render', this.props.stories);
     return (
       <div>
         <Search fetchStories={this.props.fetchStories} />
@@ -27,7 +21,8 @@ class StoriesContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  return ({ stories: state.stories.stories })
+  console.log('state.stories', state.stories)
+  return ({ stories: state.stories })
 }
 
 export default connect(mapStateToProps, { fetchStories })(StoriesContainer);

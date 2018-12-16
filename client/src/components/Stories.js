@@ -3,19 +3,20 @@ import Story from './Story';
 import { connect } from 'react-redux';
 
 const Stories = props => {
-  console.log('props.stories', props.stories)
+  let stories = !!props.stories.stories.length ? JSON.parse(props.stories.stories) : null;
+ 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-sm">
-        {
-          !!props.stories.length && (
-            props.stories.map((story, index) => (
-              <Story key={index} story={story} />
-          )))
-        }
-        </div>
-      </div>
+    <div>
+      {
+        stories && (
+          stories.map(story => {
+            console.log('story', story)
+            return (
+              <Story key={story.url} headline={story.title} source={story.name} description={story.description} url={story.url} />
+            )
+          })
+        )
+      }
     </div>
   )
 }

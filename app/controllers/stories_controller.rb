@@ -3,7 +3,7 @@ class StoriesController < ApplicationController
 
   def index
     newsapi = News.new(ENV['NEWS_API_KEY'])
-    @top_headlines = newsapi.get_top_headlines(q: 'trump', sources: 'the-new-york-times, fox-news', language: 'en')
+    @top_headlines = newsapi.get_top_headlines(language: 'en')
 
     render json: @top_headlines
   end
@@ -11,9 +11,15 @@ class StoriesController < ApplicationController
   def new
   end
 
-  def getStories
+  def getStoriesBySearch
     newsapi = News.new(ENV['NEWS_API_KEY'])
     @stories = newsapi.get_everything(q: params['_json'], sources: 'the-new-york-times, fox-news', language: 'en')
+    render json: @stories
+  end
+
+  def getTopStories
+    newsapi = News.new(ENV['NEWS_API_KEY'])
+    @stories = newsapi.get_top_headlines(language: 'en')
     render json: @stories
   end
 end

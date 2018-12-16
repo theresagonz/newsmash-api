@@ -5,10 +5,10 @@ import StoriesContainer from './containers/StoriesContainer';
 
 const App = () => {
   return (
-      <div className="App">
-        <Navbar />
-        <StoriesContainer />
-      </div>
+    <div className="App">
+      <Navbar />
+      <StoriesContainer />
+    </div>
   );
 }
 
