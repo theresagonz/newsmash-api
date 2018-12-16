@@ -32,9 +32,10 @@
 }
 
 body {
-  margin: 35px 100px;
+  margin: 15px 50px;
   color: #343a41;
-  background-color: rgb(186, 240, 201);
+  background-color: rgb(225, 222, 151);
+
 }
 
 .container {
