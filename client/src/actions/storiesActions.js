@@ -1,11 +1,20 @@
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const apiKey = process.env.REACT_APP_API_KEY;
-
-export const fetchStoriesBySearch = text => {
+export const fetchStories = text => {
   return dispatch => {
-    dispatch({ type: 'START_FETCH_STORIES_REQUEST'});
-    return fetch(`${baseUrl}/everything?apiKey=${apiKey}&q=${text}`)
+    let request = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        // 'Authorization': sessionStorage.jwt,
+        // 'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(text)
+    }
+    return fetch('/api/v1/stories', request)
       .then(res => res.json())
-      .then(data => dispatch({ type: 'FETCH_STORIES', payload: data.articles }))
+      .then(data => dispatch({
+        type: 'FETCH_STORIES',
+        payload: JSON.stringify(data) })
+      )
   }
-}
+};
