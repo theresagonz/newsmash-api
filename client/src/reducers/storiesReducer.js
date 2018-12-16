@@ -6,7 +6,7 @@ const storiesReducer = (state = { stories: [], loading: false }, action) => {
     case 'START_FETCH_STORIES_REQUEST':
       return { ...state, loading: true }
     case 'FETCH_STORIES':
-      return { loading: false, stories: action.payload }
+      return { ...state, loading: false, stories: action.payload }
     default:
       return state;
   }
