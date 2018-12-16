@@ -5,10 +5,7 @@ const Navbar = () => {
     <div className="navbar">
       <nav>
         <div className="navbar-text">
-          <img src="logo.png" alt="logo" />
-          {/* <p className="navbar-text">News Kabob</p> */}
-          {/* <a href="/">Home</a>
-          <a href="/app/">About</a> */}
+          <img src="newsmash-logo-lg.png" alt="logo" />
         </div>
       </nav>
     </div>

@@ -22,4 +22,10 @@ class StoriesController < ApplicationController
     @stories = newsapi.get_top_headlines(language: 'en')
     render json: @stories
   end
+
+  def getTopTrends
+    newsapi = News.new(ENV['NEWS_API_KEY'])
+    @stories = newsapi.get_top_headlines(language: 'en')
+    debugger
+  end
 end
