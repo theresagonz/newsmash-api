@@ -10,6 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import rootReducer from './reducers/index';
 import './index.css';
 import App from './App';
+import StoriesContainer from './containers/StoriesContainer';
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
@@ -18,6 +19,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route path="/" render={App} />
+        <Route path="/headlines" render={StoriesContainer} />
       </Switch>
     </Router>
   </Provider>,

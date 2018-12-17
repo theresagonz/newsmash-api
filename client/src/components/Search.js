@@ -17,7 +17,7 @@ export default class Search extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.fetchStoriesBySearch(this.state.text);
+    this.props.getStories(this.state.text);
     this.setState({
       text: ''
     });
@@ -27,6 +27,7 @@ export default class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
+          <label for="search_input" >{this.props.prompt}</label>
           <input
             id="search_input"
             type="text"
