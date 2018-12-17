@@ -7,6 +7,7 @@ class WelcomeContainer extends Component {
   render() {
     return (
       <div>
+        <h1>Hello!</h1>
         <Search prompt="Get news from around the web about: " getStories={this.props.getStoriesBySearch} />
         <Search prompt="Get word mash about: " />
         <Search prompt="Get word mash from: " />
@@ -17,7 +18,7 @@ class WelcomeContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getStoriesBySearch: () => dispatch(fetchStoriesBySearch())
+    getStoriesBySearch: () => dispatch(fetchStoriesBySearch)
   }
 }
 

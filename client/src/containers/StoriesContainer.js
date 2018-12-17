@@ -12,10 +12,10 @@ class StoriesContainer extends Component {
 
   render() {
     return (
-      <div>
-        <Search fetchStoriesBySearch={this.props.fetchStoriesBySearch} />
+      <>
+        <Search getStories={this.props.fetchStoriesBySearch} />
         <Stories stories={this.props.stories} />
-      </div>
+      </>
     )
   }
 }
