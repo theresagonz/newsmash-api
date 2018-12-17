@@ -1,10 +1,8 @@
 import React from 'react';
 import Story from './Story';
-import { connect } from 'react-redux';
 
 const Stories = props => {
   let stories = !!props.stories.array.length ? props.stories.array : null;
-  console.log('stories', stories);
 
   return (
     <div>
@@ -21,9 +19,4 @@ const Stories = props => {
   )
 }
 
-// const mapStateToProps = state => {
-//   return ({ stories: state.stories })
-// }
-
-// export default connect(mapStateToProps)(Stories);
 export default Stories;

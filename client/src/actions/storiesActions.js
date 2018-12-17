@@ -7,9 +7,8 @@ export const fetchStoriesBySearch = text => {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        // 'Authorization': sessionStorage.jwt,
-        // 'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(text)
     }
@@ -17,7 +16,7 @@ export const fetchStoriesBySearch = text => {
       .then(res => res.json())
       .then(data => dispatch({
         type: 'FETCH_STORIES',
-        payload: JSON.stringify(data)
+        payload: data
       })
     )
   }
@@ -25,15 +24,15 @@ export const fetchStoriesBySearch = text => {
 
 export const fetchStories = () => {
   return dispatch => {
-    return fetch('http://localhost:3001/api/v1/stories')
+    return fetch('/api/v1/stories')
       .then(res => res.json())
       .then(data => {
         console.log('data', data)
         dispatch({
-        type: 'FETCH_STORIES',
-        payload: data
-      })
-    }
+          type: 'FETCH_STORIES',
+          payload: data
+        })
+      }
     )
   }
 };
