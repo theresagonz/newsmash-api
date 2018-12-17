@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../components/Search';
+import HomeSearch from '../components/HomeSearch';
 import { fetchStoriesBySearch } from '../actions/storiesActions';
 
 class WelcomeContainer extends Component {
@@ -8,9 +9,9 @@ class WelcomeContainer extends Component {
     return (
       <div>
         <h1>Hello!</h1>
-        <Search prompt="Get news from around the web about: " getStories={this.props.getStoriesBySearch} />
-        <Search prompt="Get word mash about: " />
-        <Search prompt="Get word mash from: " />
+        <HomeSearch prompt="Get news from around the web about: " getStories={this.props.getStoriesBySearch} />
+        <HomeSearch prompt="Get word mash about: " />
+        <HomeSearch prompt="Get word mash from: " />
       </div>
     )
   }
