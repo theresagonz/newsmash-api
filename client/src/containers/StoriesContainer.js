@@ -7,7 +7,11 @@ import Stories from '../components/Stories';
 class StoriesContainer extends Component {
 
   componentDidMount() {
-    this.props.fetchStories();
+    if (this.props.location.text) {
+      this.props.fetchStoriesBySearch(this.props.location.text);
+    } else {
+      this.props.fetchStories();
+    }
   }
 
   render() {

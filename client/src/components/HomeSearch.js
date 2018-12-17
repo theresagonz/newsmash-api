@@ -29,8 +29,12 @@ export default class Search extends Component {
   render() {
     const redirect = this.state.redirect;
     if (redirect === true) {
-      return <Redirect to="/news" />
+      return (<Redirect to={{
+        pathname: '/news',
+        text: this.state.text
+    }} />)
     }
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
