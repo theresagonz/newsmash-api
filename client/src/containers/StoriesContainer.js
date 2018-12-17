@@ -20,12 +20,12 @@ class StoriesContainer extends Component {
         <Search getStories={this.props.fetchStoriesBySearch} />
         <Stories stories={this.props.stories} />
       </>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => {
-  return ({ stories: state.stories })
-}
+  return ({ stories: state.stories });
+};
 
 export default connect(mapStateToProps, { fetchStoriesBySearch, fetchStories })(StoriesContainer);

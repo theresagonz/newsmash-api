@@ -13,14 +13,14 @@ class WelcomeContainer extends Component {
         <HomeSearch prompt="Get word mash about: " />
         <HomeSearch prompt="Get word mash from: " />
       </div>
-    )
+    );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getStoriesBySearch: () => dispatch(fetchStoriesBySearch)
-  }
-}
+  };
+};
 
 export default connect(null, mapDispatchToProps)(WelcomeContainer);

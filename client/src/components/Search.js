@@ -6,13 +6,13 @@ export default class Search extends Component {
 
     this.state = {
       text: ''
-    }
+    };
   }
 
   handleChange = event => {
     this.setState({
       text: event.target.value
-    })
+    });
   }
 
   handleSubmit = event => {
@@ -38,6 +38,6 @@ export default class Search extends Component {
         <input type="submit" className="btn btn-primary" value="Get headlines" />
         </div>
       </form>
-    )
+    );
   }
 }
