@@ -27,7 +27,6 @@ export default class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          {/* <label for="search_input">Search headlines</label> */}
           <input
             id="search_input"
             type="text"

@@ -21,7 +21,6 @@ class StoriesContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state.stories', state.stories)
   return ({ stories: state.stories })
 }
 

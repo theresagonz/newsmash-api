@@ -25,12 +25,15 @@ export const fetchStoriesBySearch = text => {
 
 export const fetchStories = () => {
   return dispatch => {
-    return fetch('/api/v1/stories')
+    return fetch('http://localhost:3001/api/v1/stories')
       .then(res => res.json())
-      .then(data => dispatch({
+      .then(data => {
+        console.log('data', data)
+        dispatch({
         type: 'FETCH_STORIES',
-        payload: JSON.stringify(data)
+        payload: data
       })
+    }
     )
   }
 };
