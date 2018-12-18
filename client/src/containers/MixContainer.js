@@ -15,11 +15,9 @@ class MixContainer extends Component {
   }
 
   componentDidMount() {
-    // searchSlug exists if nested url entered in address bar
-    // debugger
-    let searchSlug = this.props.location.pathname.replace('/mixes', '').replace('/', '');
-    // searchTerm exists if searching in HomeSearch input field (or if searchSlug exists)
-    let searchTerm = this.props.location.text || searchSlug;
+    // searchTerm exists if input from HomeSearch
+    // or if nested url entered directly in address bar
+    const searchTerm = this.props.location.text || this.props.match.params.topic;
     if (searchTerm) {
       this.props.fetchStoriesBySearch(searchTerm);
     } else {
