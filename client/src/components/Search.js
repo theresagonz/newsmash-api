@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { slugify } from '../utils/utilities';
 
 export default class Search extends Component {
   constructor() {
     super();
 
     this.state = {
-      text: ''
+      text: '',
+      redirect: false
     };
   }
 
@@ -17,13 +20,30 @@ export default class Search extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    // sets store state using search data in local component state
     this.props.getMix(this.state.text);
     this.setState({
-      text: ''
+      redirect: true
     });
   }
 
+  // componentWillUpdate = () => {
+  //   if (this.state.redirect) {
+  //     return 
+  //   }
+  // }
+
   render() {
+    if (this.state.redirect) {
+      return (
+        <Redirect
+          to={{
+						pathname: `/mixes/${slugify(this.state.text)}`,
+						text: this.state.text
+					}}
+				/>
+      )
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
