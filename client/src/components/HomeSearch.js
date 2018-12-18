@@ -38,7 +38,7 @@ export default class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <label for="search_input" >{this.props.prompt}</label>
+          <label htmlFor="search_input">{this.props.prompt}</label>
           <input
             id="search_input"
             type="text"
