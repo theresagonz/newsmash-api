@@ -13,7 +13,8 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={WelcomeContainer} />
-          <Route exact path="/mixes" component={MixContainer} />
+          <Route path="/mixes" component={MixContainer} />
+          <Route path="/mixes/:topic" component={MixContainer} />
         </Switch>
       </React.Fragment>
     </Router>
