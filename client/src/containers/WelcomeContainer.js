@@ -9,7 +9,7 @@ class WelcomeContainer extends Component {
     return (
       <div>
         <h1>Hello!</h1>
-        <HomeSearch prompt="Get news from around the web about: " getStories={this.props.getStoriesBySearch} />
+        <HomeSearch prompt="Get news from around the web about: " getMix={this.props.getStoriesBySearch} />
         <HomeSearch prompt="Get word mash about: " />
         <HomeSearch prompt="Get word mash from: " />
       </div>

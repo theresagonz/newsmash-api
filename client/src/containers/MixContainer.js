@@ -4,7 +4,7 @@ import Search from '../components/Search';
 import { fetchStories, fetchStoriesBySearch } from '../actions/storiesActions';
 import Stories from '../components/Stories';
 
-class StoriesContainer extends Component {
+class MixContainer extends Component {
 
   componentDidMount() {
     if (this.props.location.text) {
@@ -17,7 +17,7 @@ class StoriesContainer extends Component {
   render() {
     return (
       <>
-        <Search getStories={this.props.fetchStoriesBySearch} />
+        <Search getMix={this.props.fetchStoriesBySearch} />
         <Stories stories={this.props.stories} />
       </>
     );
@@ -28,4 +28,4 @@ const mapStateToProps = state => {
   return ({ stories: state.stories });
 };
 
-export default connect(mapStateToProps, { fetchStoriesBySearch, fetchStories })(StoriesContainer);
+export default connect(mapStateToProps, { fetchStoriesBySearch, fetchStories })(MixContainer);

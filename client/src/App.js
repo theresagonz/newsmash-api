@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import StoriesContainer from './containers/StoriesContainer';
+import MixContainer from './containers/MixContainer';
 import WelcomeContainer from './containers/WelcomeContainer';
 
 const App = () => {
@@ -13,11 +13,11 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={WelcomeContainer} />
-          <Route exact path="/news" component={StoriesContainer} />
+          <Route exact path="/mixes" component={MixContainer} />
         </Switch>
       </React.Fragment>
     </Router>
   );
-}
+};
 
 export default App;

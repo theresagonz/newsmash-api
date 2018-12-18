@@ -8,31 +8,33 @@ export default class Search extends Component {
     this.state = {
       text: '',
       redirect: false
-    }
+    };
   }
 
   handleChange = event => {
     this.setState({
       text: event.target.value
-    })
+    });
   }
 
   handleSubmit = event => {
     event.preventDefault();
     // debugger
-    this.props.getStories(this.state.text);
+    this.props.getMix(this.state.text);
     this.setState({
       redirect: true
-    })
+    });
   }
 
   render() {
     const redirect = this.state.redirect;
     if (redirect === true) {
-      return (<Redirect to={{
-        pathname: '/news',
-        text: this.state.text
-    }} />)
+      return (
+        <Redirect to={{
+          pathname: '/mixes',
+          text: this.state.text
+        }} />
+      );
     }
 
     return (
@@ -49,6 +51,6 @@ export default class Search extends Component {
         <input type="submit" className="btn btn-primary" value="Get headlines" />
         </div>
       </form>
-    )
+    );
   }
 }
