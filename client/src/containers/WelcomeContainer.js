@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Search from '../components/Search';
 import HomeSearch from '../components/HomeSearch';
-import { fetchStoriesBySearch } from '../actions/storiesActions';
+import { searchStoriesAndUpdateStore } from '../actions/storiesActions';
 
 class WelcomeContainer extends Component {
   render() {
     return (
       <div>
-        <h1>Hello!</h1>
-        <HomeSearch prompt="Get news from around the web about: " getMix={this.props.getStoriesBySearch} />
-        <HomeSearch prompt="Get word mash about: " />
-        <HomeSearch prompt="Get word mash from: " />
+        <h1>Get a mix</h1>
+        <HomeSearch searchStoriesAndUpdateStore={this.props.searchStoriesAndUpdateStore} />
+        <h1>Get a mash</h1>
+        <HomeSearch />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getStoriesBySearch: () => dispatch(fetchStoriesBySearch)
-  };
-};
-
-export default connect(null, mapDispatchToProps)(WelcomeContainer);
+export default connect(null, { searchStoriesAndUpdateStore })(WelcomeContainer);

@@ -1,10 +1,9 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import MixContainer from './containers/MixContainer';
 import WelcomeContainer from './containers/WelcomeContainer';
+import MixContainer from './containers/MixContainer';
 
 const App = () => {
   return (
