@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router';
-import Search from '../components/Search';
+import { withRouter } from 'react-router';
+import MixSearch from '../components/MixSearch';
 import { getStoriesAndUpdateStore, searchStoriesAndUpdateStore } from '../actions/storiesActions';
 import Stories from '../components/Stories';
 
@@ -9,7 +9,6 @@ import Stories from '../components/Stories';
 class MixContainer extends Component {
   constructor() {
     super();
-
     
     this.state = {
       searchTerm: ''
@@ -61,7 +60,7 @@ class MixContainer extends Component {
     // }
     return (
       <div className="mix-container">
-        <Search searchStoriesAndUpdateStore={this.props.searchStoriesAndUpdateStore}  />
+        <MixSearch searchStoriesAndUpdateStore={this.props.searchStoriesAndUpdateStore}  />
         <Stories stories={this.props.stories} />
       </div>
     );

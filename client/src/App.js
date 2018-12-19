@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import WelcomeContainer from './containers/WelcomeContainer';
 import MixContainer from './containers/MixContainer';
+import MashContainer from './containers/MashContainer';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route exact path="/" component={WelcomeContainer} />
           <Route path="/mixes" component={MixContainer} />
           {/* <Route path="/mixes/:topic" component={MixContainer} /> */}
+          <Route path="/mashes" component={MashContainer} />
         </Switch>
       </React.Fragment>
     </Router>

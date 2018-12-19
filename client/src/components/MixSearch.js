@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { slugify } from '../utils/utilities';
 
-class Search extends Component {
+class MixSearch extends Component {
   constructor() {
     super();
 
@@ -58,4 +58,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default MixSearch;
