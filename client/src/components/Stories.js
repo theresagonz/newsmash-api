@@ -3,7 +3,7 @@ import Story from './Story';
 
 const Stories = props => {
   let stories = !!props.stories.array.length ? props.stories.array : null;
-  debugger
+  // debugger
   return (
     <div>
       {/* <h2>Mix about {props.location.text}</h2> */}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { slugify } from '../utils/utilities';
 
-export default class Search extends Component {
+class Search extends Component {
   constructor() {
     super();
 
@@ -22,23 +22,23 @@ export default class Search extends Component {
     event.preventDefault();
     // sets store state using search data in local component state
     this.props.searchStoriesAndUpdateStore(this.state.text);
-    debugger
     this.setState({
-      redirect: true
+      // redirect: true
+      text: ''
     });
   }
 
   render() {
-    if (this.state.redirect) {
-      return (
-        <Redirect
-          to={{
-						pathname: `/mixes/${slugify(this.state.text)}`,
-						text: this.state.text
-					}}
-				/>
-      );
-    }
+    // if (this.state.redirect) {
+    //   return (
+    //     <Redirect
+    //       to={{
+		// 				pathname: `/mixes/${slugify(this.state.text)}`,
+		// 				text: this.state.text
+		// 			}}
+		// 		/>
+    //   );
+    // }
     
     return (
       <form onSubmit={this.handleSubmit}>
@@ -57,3 +57,5 @@ export default class Search extends Component {
     );
   }
 }
+
+export default Search;
