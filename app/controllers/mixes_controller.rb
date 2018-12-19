@@ -4,22 +4,21 @@ class MixesController < ApplicationController
   def sources
   end
 
-  def published_at
-    publishedAt.localtime.strftime('%A, %B %e, %Y @ %l:%M %P')
-  end
-
-  def getTopStories
+  def getTopStoriesFromNewsApi
     newsapi = News.new(ENV['NEWS_API_KEY'])
     @top_stories = newsapi.get_top_headlines(language: 'en')
-    render json: @top_stories.as_json({ :methods => [:published_at]})
+    render json: @top_stories
   end
 
-  def getStoriesBySearch
+  def getStoriesBySearchFromNewsApi
+    # searchTerm = params['_json'] || 
+    # binding.pry
+    searchTerm = params['_json']
     newsapi = News.new(ENV['NEWS_API_KEY'])
-    all_stories = newsapi.get_everything(q: params['_json'], language: 'en')
+    all_stories = newsapi.get_everything(q: searchTerm, language: 'en')
     # exclude nytimes briefings
-    filtered_stories = all_stories.select {|story| !story.title.include? "Briefing" }
-    render json: filtered_stories
+    @filtered_stories = all_stories.select {|story| !story.title.include? "Briefing" }
+    render json: @filtered_stories
   end
 
   def getTopTrends

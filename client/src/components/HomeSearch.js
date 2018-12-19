@@ -21,14 +21,14 @@ export default class Search extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		// debugger
-		this.props.getMix(this.state.text);
+		this.props.searchStoriesAndUpdateStore(this.state.text);
 		this.setState({
 			redirect: true
 		});
 	};
 
 	render() {
-		if (this.state.redirect === true) {
+		if (this.state.redirect) {
 			return (
 				<Redirect
 					to={{

@@ -21,17 +21,12 @@ export default class Search extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    this.props.getMix(this.state.text);
+    this.props.searchStoriesAndUpdateStore(this.state.text);
+    debugger
     this.setState({
       redirect: true
     });
   }
-
-  // componentWillUpdate = () => {
-  //   if (this.state.redirect) {
-  //     return 
-  //   }
-  // }
 
   render() {
     if (this.state.redirect) {
@@ -42,8 +37,9 @@ export default class Search extends Component {
 						text: this.state.text
 					}}
 				/>
-      )
+      );
     }
+    
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
