@@ -1,7 +1,6 @@
 export const getStoriesAndUpdateStore = () => {
   // returns a function that dispatches an action with data to the redux store
-  return dispatch => {
-    
+  return dispatch => {    
     fetch('/api/v1/mixes')
       .then(res => res.json())
       .then(data => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HomeSearch from '../components/HomeSearch';
-import { searchStoriesAndUpdateStore } from '../actions/storiesActions';
+import { searchStoriesAndUpdateStore } from '../actions/mixActions';
 
 class WelcomeContainer extends Component {
   render() {

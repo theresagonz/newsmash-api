@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router-dom';
-// import { slugify } from '../utils/utilities';
-import { getMashKeywords } from '../actions/mashActions';
+import { Redirect } from 'react-router-dom';
+import { slugify } from '../utils/utilities';
 
 class MashSearch extends Component {
   constructor() {

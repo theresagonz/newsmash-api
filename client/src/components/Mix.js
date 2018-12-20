@@ -1,5 +1,5 @@
 import React from 'react';
-import Story from './Story';
+import MixItem from './MixItem';
 
 const Stories = props => {
   let stories = !!props.stories.array.length ? props.stories.array : null;
@@ -11,7 +11,7 @@ const Stories = props => {
         stories && (
           stories.map(story => {
             return (
-              <Story
+              <MixItem
                 key={story.url}
                 headline={story.title}
                 source={story.name}

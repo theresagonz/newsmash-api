@@ -7,8 +7,8 @@ class MixSearch extends Component {
     super();
 
     this.state = {
-      text: '',
-      redirect: false
+      text: ''
+      // redirect: false
     };
   }
 
@@ -21,7 +21,7 @@ class MixSearch extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    this.props.searchStoriesAndUpdateStore(this.state.text);
+    this.props.getMix(this.state.text);
     this.setState({
       // redirect: true
       text: ''
@@ -51,7 +51,7 @@ class MixSearch extends Component {
             onChange={this.handleChange}
             // className="form-control"
           />
-        <input type="submit" className="btn btn-primary" value="Get headlines" />
+        <input type="submit" className="btn btn-primary" value="Mix it" />
         </div>
       </form>
     );
