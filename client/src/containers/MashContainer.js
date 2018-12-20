@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import MashSearch from '../components/MixSearch';
+import { connect } from 'react-redux';
+import MashSearch from '../components/MashSearch';
 import Mash from '../components/Mash';
+import { getMashWords } from '../actions/mashActions';
 
-export default class MashContainer extends Component {
+class MashContainer extends Component {
+
   render() {
     return (
       <div className="mash-container">
-        <MashSearch />
+        <MashSearch getMashWords={ this.props.getMashWords }/>
         <Mash />
       </div>
     );
   }
 }
+
+export default connect(null, { getMashWords })(MashContainer);

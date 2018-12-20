@@ -4,11 +4,7 @@ Rails.application.routes.draw do
 
   post '/api/v1/mixes', to: 'mixes#getStoriesBySearchFromNewsApi'
   get '/api/v1/mixes', to: 'mixes#getTopStoriesFromNewsApi'
+  post '/api/v1/mashes', to: 'mashes#queryMashWords'
+  get '/api/v1/mashes', to: 'mashes#getTopMashWords'
 
-  scope '/api/v1' do
-    resources :users
-    resources :clouds
-    resources :stories
-
-  end
 end
