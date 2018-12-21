@@ -8,8 +8,8 @@ class MashContainer extends Component {
 
   render() {
     return (
-      <div className="mash-container">
-        <MashSearch getMashWords={ this.props.getMashWords }/>
+      <div className="mash-container main-content">
+        {/* <MashSearch getMashWords={ this.props.getMashWords }/> */}
         <Mash />
       </div>
     );

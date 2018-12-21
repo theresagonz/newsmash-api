@@ -9,21 +9,21 @@ class MixContainer extends Component {
   componentDidMount() {
     // searchTerm exists if input is from HomeSearch
     // or if nested url entered directly in address bar
-    debugger
     let searchTerm = this.props.location.text || this.props.match.params.topic;
     if (searchTerm) {
-      debugger
+      // debugger
       this.props.searchStoriesAndUpdateStore(searchTerm);
     } else {
-      debugger
+      // debugger
       this.props.getStoriesAndUpdateStore();
     }
   }
 
   render() {
     return (
-      <div className="mix-container">
-        <MixSearch getMix={this.props.searchStoriesAndUpdateStore}  />
+      <div className="mix-container main-content">
+        <h1>Top Stories Mix</h1>
+        {/* <MixSearch getMix={this.props.searchStoriesAndUpdateStore}  /> */}
         <Mix stories={this.props.stories} />
       </div>
     );

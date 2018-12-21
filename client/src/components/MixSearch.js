@@ -50,18 +50,21 @@ class MixSearch extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="search_input" >{this.props.prompt}</label>
-          <input
-            id="search_input"
-            type="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-        <input type="submit" className="btn btn-primary" value="Mix it" />
-        </div>
-      </form>
+      // <div className="search-container">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="search_input" >{this.props.prompt}</label>
+            <input
+              id="search_input"
+              type="text"
+              value={this.state.text}
+              onChange={this.handleChange}
+              className="form-control"
+            />
+          </div>
+          <input type="submit" className="btn btn-primary" value="Mix it" />
+        </form>
+      // </div>
     );
   }
 }
