@@ -9,10 +9,13 @@ class MixContainer extends Component {
   componentDidMount() {
     // searchTerm exists if input is from HomeSearch
     // or if nested url entered directly in address bar
-    let searchTerm = this.props.location.text;
+    debugger
+    let searchTerm = this.props.location.text || this.props.match.params.topic;
     if (searchTerm) {
+      debugger
       this.props.searchStoriesAndUpdateStore(searchTerm);
     } else {
+      debugger
       this.props.getStoriesAndUpdateStore();
     }
   }

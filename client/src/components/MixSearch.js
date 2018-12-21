@@ -7,8 +7,8 @@ class MixSearch extends Component {
     super();
 
     this.state = {
-      text: ''
-      // redirect: false
+      text: '',
+      redirect: false
     };
   }
 
@@ -23,23 +23,31 @@ class MixSearch extends Component {
     // sets store state using search data in local component state
     this.props.getMix(this.state.text);
     this.setState({
-      // redirect: true
+      redirect: true,
       text: ''
     });
   }
 
+  searchRedirect = () => {
+    return (
+      <Redirect
+        to={{
+          pathname: `/mixes/${slugify(this.state.text)}`,
+          text: this.state.text
+        }}
+      />
+    );
+  }
+
   render() {
-    // if (this.state.redirect) {
-    //   return (
-    //     <Redirect
-    //       to={{
-		// 				pathname: `/mixes/${slugify(this.state.text)}`,
-		// 				text: this.state.text
-		// 			}}
-		// 		/>
-    //   );
-    // }
-    
+    if (this.state.redirect) {
+      debugger
+      this.setState({
+        redirect: false
+      });
+      this.searchRedirect();
+    }
+          
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
