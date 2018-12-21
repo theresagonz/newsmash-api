@@ -32,22 +32,23 @@ class MixSearch extends Component {
     return (
       <Redirect
         to={{
-          pathname: `/mixes/${slugify(this.state.text)}`,
-          text: this.state.text
+          pathname: `/mixes/${slugify(this.state.text)}`
+          // state: { text: this.state.text }
         }}
       />
     );
   }
 
-  render() {
-    if (this.state.redirect) {
-      debugger
+  componentDidUpdate = () => {
+    if (this.state.redirect === true) {
       this.setState({
-        redirect: false
+      redirect: false
       });
       this.searchRedirect();
     }
-          
+  }
+
+  render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -57,7 +58,6 @@ class MixSearch extends Component {
             type="text"
             value={this.state.text}
             onChange={this.handleChange}
-            // className="form-control"
           />
         <input type="submit" className="btn btn-primary" value="Mix it" />
         </div>
