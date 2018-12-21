@@ -2,7 +2,7 @@ import cuid from 'cuid';
 export const cuidFn = cuid;
 
 const storiesReducer = (state = { array: [], loading: false }, action) => {
-  console.log('action', action)
+  // console.log('action', action)
   switch (action.type) {
     case 'START_FETCH_STORIES_REQUEST':
       return { ...state, loading: true };
@@ -14,3 +14,4 @@ const storiesReducer = (state = { array: [], loading: false }, action) => {
 };
 
 export default storiesReducer;
+   

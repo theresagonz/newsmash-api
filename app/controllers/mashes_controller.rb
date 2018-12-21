@@ -19,7 +19,7 @@ class MashesController < ApplicationController
     stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', sortBy: 'relevancy')
 
     @words = Mash.getWordStrings(stories)
-    render json: @words
+    render json: @words.as_json(:root => false)
   end
 
   def queryMashWords
