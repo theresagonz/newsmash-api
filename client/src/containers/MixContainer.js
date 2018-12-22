@@ -1,21 +1,43 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MixSearch from '../components/MixSearch';
 import { getStoriesAndUpdateStore, searchStoriesAndUpdateStore } from '../actions/mixActions';
 import Mix from '../components/Mix';
 
-class MixContainer extends Component {
+const PROPTYPES = {
+  getStoriesAndUpdateStore: PropTypes.func,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({ topic: PropTypes.string }),
+  }),
+  mix: PropTypes.shape({
+    data: PropTypes.array,
+    loading: PropTypes.bool,
+  }), 
+  searchStoriesAndUpdateStore: PropTypes.func,
+};
 
-  componentDidMount() {
-    // searchTerm exists if input is from HomeSearch
-    // or if nested url entered directly in address bar
-    let searchTerm = this.props.location.text || this.props.match.params.topic;
+class MixContainer extends Component {
+  componentDidMount(prevProps) {
+    const searchTerm = this.props.match.params.topic;
     if (searchTerm) {
-      // debugger
       this.props.searchStoriesAndUpdateStore(searchTerm);
     } else {
-      // debugger
       this.props.getStoriesAndUpdateStore();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      const searchTerm = this.props.match.params.topic;
+      if (searchTerm) {
+        this.props.searchStoriesAndUpdateStore(searchTerm);
+      } else {
+        this.props.getStoriesAndUpdateStore();
+      }
     }
   }
 
@@ -23,15 +45,16 @@ class MixContainer extends Component {
     return (
       <div className="mix-container main-content">
         <h1>Top Stories Mix</h1>
-        {/* <MixSearch getMix={this.props.searchStoriesAndUpdateStore}  /> */}
-        <Mix stories={this.props.stories} />
+        <Mix mix={this.props.mix} />
       </div>
     );
   }
 }
 
+MixContainer.propTypes = PROPTYPES;
+
 const mapStateToProps = state => {
-  return ({ stories: state.stories });
+  return ({ mix: state.mix });
 };
 
 export default connect(mapStateToProps, { getStoriesAndUpdateStore, searchStoriesAndUpdateStore })(MixContainer);

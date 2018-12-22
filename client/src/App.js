@@ -10,9 +10,9 @@ const App = () => {
   return (
     <Router>
       <React.Fragment>
-        <Navbar />
+          <Route path="/" component={Navbar} />
           <Route path="/" component={SearchSidebar} />
-          <Route path="/mixes" component={MixContainer} />
+          <Route exact path="/mixes" component={MixContainer} />
           <Route path="/mixes/:topic" component={MixContainer} />
           <Route path="/mashes" component={MashContainer} />
       </React.Fragment>

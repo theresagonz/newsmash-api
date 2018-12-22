@@ -1,6 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { slugify } from '../utils/utilities';
+
+const PROPTYPES = {
+  getMix: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+};
 
 class MixSearch extends Component {
   constructor() {
@@ -8,7 +15,6 @@ class MixSearch extends Component {
 
     this.state = {
       text: '',
-      redirect: false
     };
   }
 
@@ -22,30 +28,14 @@ class MixSearch extends Component {
     event.preventDefault();
     // sets store state using search data in local component state
     this.props.getMix(this.state.text);
+    this.searchRedirect();
     this.setState({
-      redirect: true,
       text: ''
     });
   }
 
   searchRedirect = () => {
-    return (
-      <Redirect
-        to={{
-          pathname: `/mixes/${slugify(this.state.text)}`
-          // state: { text: this.state.text }
-        }}
-      />
-    );
-  }
-
-  componentDidUpdate = () => {
-    if (this.state.redirect === true) {
-      this.setState({
-      redirect: false
-      });
-      this.searchRedirect();
-    }
+    this.props.history.push(`/mixes/${slugify(this.state.text)}`);
   }
 
   render() {
@@ -68,5 +58,7 @@ class MixSearch extends Component {
     );
   }
 }
+
+MixSearch.propTypes = PROPTYPES;
 
 export default MixSearch;

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import storiesReducer from './storiesReducer';
+import mixReducer from './mixReducer';
 import mashReducer from './mashReducer';
 
 const rootReducer = combineReducers({
-  stories: storiesReducer,
+  mix: mixReducer,
   mashes: mashReducer
 });
 export default rootReducer;

@@ -9,7 +9,10 @@ class SearchSidebar extends Component {
     return (
       <div className="sidebar">
         <h4>Get a mix</h4>
-        <MixSearch getMix={this.props.searchStoriesAndUpdateStore} />
+        <MixSearch
+          getMix={this.props.searchStoriesAndUpdateStore}
+          history={this.props.history}
+        />
         <h4>Get a mash</h4>
         <HomeSearch />
       </div>

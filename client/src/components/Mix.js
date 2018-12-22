@@ -2,8 +2,7 @@ import React from 'react';
 import MixItem from './MixItem';
 
 const Stories = props => {
-  let stories = !!props.stories.array.length ? props.stories.array : null;
-  // debugger
+  let stories = !!props.mix.data.length ? props.mix.data : null;
   return (
     <div>
       {/* <h2>Mix about {props.location.text}</h2> */}
