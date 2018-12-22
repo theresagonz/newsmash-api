@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import HomeSearch from '../components/HomeSearch';
-import MixSearch from '../components/MixSearch';
+import Search from '../components/Search';
 import { searchStoriesAndUpdateStore } from '../actions/mixActions';
+import { getMashWords } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <h4>Get a mix</h4>
-        <MixSearch
-          getMix={this.props.searchStoriesAndUpdateStore}
+        <Search
+          searchType="mix"
+          getContent={this.props.searchStoriesAndUpdateStore}
           history={this.props.history}
         />
-        <h4>Get a mash</h4>
-        <HomeSearch />
+        <Search
+          searchType="mash"
+          getContent={this.props.getMashWords}
+          history={this.props.history}
+        />
       </div>
     );
   }
 }
 
-export default connect(null, { searchStoriesAndUpdateStore })(SearchSidebar);
+export default connect(null, { searchStoriesAndUpdateStore, getMashWords })(SearchSidebar);

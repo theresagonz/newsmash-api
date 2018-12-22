@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { slugify } from '../utils/utilities';
 
 const PROPTYPES = {
@@ -9,7 +10,7 @@ const PROPTYPES = {
   }),
 };
 
-class MixSearch extends Component {
+class Search extends Component {
   constructor() {
     super();
 
@@ -27,7 +28,7 @@ class MixSearch extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    this.props.getMix(this.state.text);
+    this.props.getContent(this.state.text);
     this.searchRedirect();
     this.setState({
       text: ''
@@ -35,15 +36,16 @@ class MixSearch extends Component {
   }
 
   searchRedirect = () => {
-    this.props.history.push(`/mixes/${slugify(this.state.text)}`);
+    const path = this.props.searchType + 'es'
+    this.props.history.push(`/${path}/${slugify(this.state.text)}`);
   }
 
   render() {
     return (
       // <div className="search-container">
-        <form onSubmit={this.handleSubmit}>
+        <form className="sidebar-form" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="search_input" >{this.props.prompt}</label>
+            <label className="search-prompt" htmlFor="search_input" >Get a {this.props.searchType}</label>
             <input
               id="search_input"
               type="text"
@@ -52,13 +54,13 @@ class MixSearch extends Component {
               className="form-control"
             />
           </div>
-          <input type="submit" className="btn btn-primary" value="Mix it" />
+          <input type="submit" className="btn btn-primary" value={`${_.capitalize(this.props.searchType)} it`} />
         </form>
       // </div>
     );
   }
 }
 
-MixSearch.propTypes = PROPTYPES;
+Search.propTypes = PROPTYPES;
 
-export default MixSearch;
+export default Search;

@@ -45,3 +45,12 @@ a:hover, a:visited, a:link, a:active {
   font-style: italic;
   margin: 1.5em 0;
 }
+
+.sidebar-form {
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+.search-prompt {
+  font-size: 1.25em;
+}

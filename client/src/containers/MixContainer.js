@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import MixSearch from '../components/MixSearch';
+import Search from '../components/Search';
 import { getStoriesAndUpdateStore, searchStoriesAndUpdateStore } from '../actions/mixActions';
 import Mix from '../components/Mix';
 
@@ -47,8 +47,7 @@ class MixContainer extends Component {
     const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))} Mix` : 'Top Stories Mix';
     return (
       <div className="mix-container main-content">
-        <div className="headline">
-          {headline}</div>
+        <div className="headline">{headline}</div>
         <Mix mix={this.props.mix} />
       </div>
     );
