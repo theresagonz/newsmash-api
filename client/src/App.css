@@ -32,4 +32,16 @@ a:hover, a:visited, a:link, a:active {
   background-color: white;
   /* padding: 20px 30px 20px 30px; */
   padding: 20px 30px 30px 30px;
+
+}
+
+.headline {
+  font-size: 2em;
+  margin: 0 0 0.5em 0;
+}
+
+.loading-message {
+  font-size: 1.5em;
+  font-style: italic;
+  margin: 1.5em 0;
 }
