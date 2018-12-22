@@ -1,7 +1,8 @@
 export const getStoriesAndUpdateStore = () => {
   // returns a function that dispatches an action with data to the redux store
-  return dispatch => {    
-    fetch('/api/v1/mixes')
+  return dispatch => {
+    dispatch({ type: 'START_FETCH_STORIES_REQUEST' });
+    return fetch('/api/v1/mixes')
       .then(res => res.json())
       .then(data => {
         return dispatch({
@@ -23,7 +24,8 @@ export const searchStoriesAndUpdateStore = (text) => {
     body: JSON.stringify(text)
   };
   return dispatch => {
-    fetch('/api/v1/mixes', request)
+    dispatch({ type: 'START_FETCH_STORIES_REQUEST' });
+    return fetch('/api/v1/mixes', request)
       .then(res => res.json())
       .then(data => {
         dispatch({
