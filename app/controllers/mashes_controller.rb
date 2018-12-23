@@ -1,8 +1,8 @@
 class MashesController < ApplicationController
-  # def index
-  #   @mashes = Mash.all
-  #   render json: @mashes
-  # end
+  def index
+    @mashes = Mash.all
+    render json: @mashes
+  end
 
   def create
     @mash = Mash.new(mash_params)
@@ -15,11 +15,20 @@ class MashesController < ApplicationController
 
   def getTopMashWords
     # Get data using News API's library
+
     newsapi = News.new(ENV['NEWS_API_KEY']);
     stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', sortBy: 'relevancy')
 
-    @words = Mash.getWordStrings(stories)
-    render json: @words.as_json(:root => false)
+    words = Mash.getWordStrings(stories).join('')
+    conn = Faraday.new(url: ENV['TEXT_ANALYSIS_BASE_URL'] + '/keywords')
+
+    response = conn.post do |req|
+      req.headers['Content-Type'] = 'application/json'
+      req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
+      req.params['text'] = words
+    end
+
+    render json: response.body
   end
 
   def queryMashWords
@@ -28,7 +37,6 @@ class MashesController < ApplicationController
     stories = newsapi.everything(language: 'en', category: 'general')
 
   end
-
 
   private
 
