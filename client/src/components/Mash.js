@@ -8,9 +8,7 @@ const mashConfig = {
   }
 };
 
-
 export default class Mash extends Component {
-
   render() {
     return (
       <div id="mash-container">

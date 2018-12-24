@@ -28,7 +28,8 @@ class MashesController < ApplicationController
       req.params['text'] = words
     end
 
-    render json: response.body
+    @mash = Mash.new(JSON.parse(response.body))
+    render json: @mash
   end
 
   def queryMashWords

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../components/Search';
 import { searchStoriesAndUpdateStore } from '../actions/mixActions';
-import { getMashWords } from '../actions/mashActions';
+import { getMashWords, getTopMashes } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
   render() {
@@ -15,7 +15,7 @@ class SearchSidebar extends Component {
         />
         <Search
           searchType="mash"
-          getContent={this.props.getMashWords}
+          getContent={this.props.getTopMashes}
           history={this.props.history}
         />
       </div>
