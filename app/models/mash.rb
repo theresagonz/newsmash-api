@@ -1,9 +1,22 @@
 class Mash
-  include ActiveModel::Serialization
-  attr_reader :words
 
   def initialize(data)
     @words = data['keywords']
+  end
+
+  def as_json(options = {})
+    {
+      "options" => {
+        "words" => (
+          @words.map do |word|
+            {
+              "text" => word['keyword'],
+              "count" => word['confidence_score']
+            }
+          end
+        )
+      }
+    }
   end
 
   def self.default_sources

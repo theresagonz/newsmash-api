@@ -29,7 +29,7 @@ class MashesController < ApplicationController
     end
 
     @mash = Mash.new(JSON.parse(response.body))
-    render json: @mash
+    render json: @mash.as_json
   end
 
   def queryMashWords
