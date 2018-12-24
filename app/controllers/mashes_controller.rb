@@ -1,4 +1,6 @@
 class MashesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @mashes = Mash.all
     render json: @mashes
@@ -33,10 +35,22 @@ class MashesController < ApplicationController
   end
 
   def queryMashWords
+    searchTerm = params['_json']
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY']);
-    stories = newsapi.everything(language: 'en', category: 'general')
-
+    stories = newsapi.get_everything(q: searchTerm, sources: Mash.default_sources, language: 'en')
+    
+    words = Mash.getWordStrings(stories).join('')
+    conn = Faraday.new(url: ENV['TEXT_ANALYSIS_BASE_URL'] + '/keywords')
+    
+    response = conn.post do |req|
+      req.headers['Content-Type'] = 'application/json'
+      req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
+      req.params['text'] = words
+    end
+    
+    @mash = Mash.new(JSON.parse(response.body))
+    render json: @mash.as_json
   end
 
   private

@@ -6,7 +6,7 @@ export default class Mash extends Component {
     const mashConfig = {
       type: 'wordcloud',
       options: {
-        'words': this.props.mash.words
+        words: this.props.mash.words
       }
     };
     console.log('this.props.mash.loading :', this.props.mash.loading);

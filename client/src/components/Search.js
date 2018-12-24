@@ -27,7 +27,6 @@ class Search extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    debugger
     this.props.getContent(this.state.text);
     this.searchRedirect();
     this.setState({

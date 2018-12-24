@@ -1,5 +1,6 @@
 export const getMashWords = (text) => {
-  const request = {
+  console.log('text :', text);
+  let request = {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -8,7 +9,8 @@ export const getMashWords = (text) => {
     body: JSON.stringify(text)
   };
   return (dispatch) => {
-    fetch('/api/v1/mashes', request)
+    dispatch({ type: 'START_GETTING_MASH_DATA_FROM_SERVER' });
+    return fetch('/api/v1/mashes', request)
       .then(res => res.json())
       .then(data => {
         console.log('data :', data);
