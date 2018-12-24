@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import Mash from '../components/Mash';
 import { getMashWords, getTopMashes } from '../actions/mashActions';
 
@@ -35,8 +36,11 @@ class MashContainer extends Component {
   }
 
   render() {
+    const slugifiedTopic = this.props.match.params.topic;
+    const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))}` : 'Top Stories';
     return (
       <div className="mash-container main-content">
+      <h1>{headline} Mash</h1>
         <Mash mash={this.props.mash} />
         <div id="mash-canvas"></div>
       </div>
