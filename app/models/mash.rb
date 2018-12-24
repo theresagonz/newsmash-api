@@ -6,16 +6,14 @@ class Mash
 
   def as_json(options = {})
     {
-      "options" => {
-        "words" => (
-          @words.map do |word|
-            {
-              "text" => word['keyword'],
-              "count" => word['confidence_score']
-            }
-          end
-        )
-      }
+      "words" => (
+        @words.map do |word|
+          {
+            "text" => word['keyword'],
+            "count" => word['confidence_score']
+          }
+        end
+      )
     }
   end
 

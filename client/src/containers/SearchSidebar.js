@@ -6,6 +6,7 @@ import { getMashWords, getTopMashes } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
   render() {
+    console.log('this.props.getTopMashes :', this.props.getTopMashes);
     return (
       <div className="sidebar">
         <Search
@@ -23,4 +24,4 @@ class SearchSidebar extends Component {
   }
 }
 
-export default connect(null, { searchStoriesAndUpdateStore, getMashWords })(SearchSidebar);
+export default connect(null, { searchStoriesAndUpdateStore, getTopMashes })(SearchSidebar);

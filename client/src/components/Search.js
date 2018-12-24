@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { slugify } from '../utils/utilities';
 
 const PROPTYPES = {
-  getMix: PropTypes.func,
+  getContent: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
@@ -28,7 +28,8 @@ class Search extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    // this.props.getContent(this.state.text);
+    debugger
+    this.props.getContent(this.state.text);
     this.searchRedirect();
     this.setState({
       text: ''
