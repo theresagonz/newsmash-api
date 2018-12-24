@@ -9,6 +9,7 @@ class MashContainer extends Component {
     return (
       <div className="mash-container main-content">
         <Mash />
+        <div id="mash-canvas"></div>
       </div>
     );
   }
