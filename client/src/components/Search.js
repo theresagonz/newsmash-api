@@ -13,7 +13,6 @@ const PROPTYPES = {
 class Search extends Component {
   constructor() {
     super();
-
     this.state = {
       text: '',
     };

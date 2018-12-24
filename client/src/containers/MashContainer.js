@@ -4,15 +4,21 @@ import Mash from '../components/Mash';
 import { getMashWords, getTopMashes } from '../actions/mashActions';
 
 class MashContainer extends Component {
-
   render() {
     return (
       <div className="mash-container main-content">
-        <Mash />
+        <Mash mash={this.props.mash} />
         <div id="mash-canvas"></div>
       </div>
     );
   }
 }
 
-export default connect(null, { getMashWords, getTopMashes })(MashContainer);
+const mapStateToProps = (state) => {
+  console.log('state.mash.loading', state.mash.loading)
+  return ({
+    mash: state.mash
+  });
+};
+
+export default connect(mapStateToProps, { getMashWords, getTopMashes })(MashContainer);

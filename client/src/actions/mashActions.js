@@ -23,11 +23,11 @@ export const getMashWords = (text) => {
 
 export const getTopMashes = () => {
   return (dispatch) => {
-    fetch('/api/v1/mashes')
+    dispatch({ type: 'START_GETTING_MASH_DATA_FROM_SERVER' });
+    return fetch('/api/v1/mashes')
       .then(res => res.json())
       .then(data => {
-        console.log('data :', data);
-        return dispatch({
+        dispatch({
           type: 'GET_MASH_DATA_FROM_SERVER',
           payload: data
         });

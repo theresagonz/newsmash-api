@@ -4,6 +4,6 @@ import mashReducer from './mashReducer';
 
 const rootReducer = combineReducers({
   mix: mixReducer,
-  mashes: mashReducer
+  mash: mashReducer
 });
 export default rootReducer;
