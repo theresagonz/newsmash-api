@@ -2,6 +2,7 @@ body {
   /* margin: 30px; */
   color: #343a41;
   /* background-color: rgb(249, 246, 174); */
+  font-family: 'Roboto', sans-serif;
 
 }
 
@@ -9,41 +10,55 @@ body {
   display: flex;
 }
 
-a:hover, a:visited, a:link, a:active {
-   text-decoration: none;
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
 }
 
 .navbar {
-  background-color: rgb(73, 166, 199);
+  background-color: rgb(90, 185, 243, 0.96);
+}
+
+.navbar-text {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sidebar {
-  align-content: center;
-  float: left;
-  padding: 20px 30px 0 30px;
-  height: 500vh;
-  max-width: 200px;
+  /* float: left; */
+  padding: 20px 30px 1350px 30px;
+  width: 25%;
   position: sticky;
   top: 0px;
   background-color: lightgrey;
+  margin-bottom: -1350px;
 }
 
 .main-content {
   background-color: white;
-  /* padding: 20px 30px 20px 30px; */
   padding: 20px 30px 30px 30px;
-
+  position: relative;
+  top: -350px;
+  float: right;
+  width: 75%;
 }
 
 .headline {
-  font-size: 2em;
-  margin: 0 0 0.5em 0;
+  text-align: center;
+  font-size: 1.9em;
+  margin: 0 0 1em 0;
+  font-family: 'Oswald', sans-serif;
 }
 
 .loading-message {
+  font-family: 'Oswald', sans-serif;
   font-size: 1.5em;
   font-style: italic;
   margin: 1.5em 0;
+  text-align: center;
 }
 
 .sidebar-form {
@@ -53,4 +68,29 @@ a:hover, a:visited, a:link, a:active {
 
 .search-prompt {
   font-size: 1.25em;
+  font-family: 'Oswald', sans-serif;
+}
+
+.mix-headline {
+  font-family: 'Zilla Slab', serif;
+  font-size: 1.2em;
+  margin: 5px 0 0 0;
+}
+
+.mix-item {
+  margin: 0 0 0.75em 0;
+}
+
+.news-source {
+  font-family: 'Staatliches', sans-serif;
+  font-size: 0.95em;
+  position: relative;
+  top: 0.03em;
+  padding: 0 0.4em 0 0;
+}
+
+.news-content {
+  font-size: .75em;
+  line-height: 0.8;
+  font-family: 'Roboto', sans-serif;
 }

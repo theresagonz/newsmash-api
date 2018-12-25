@@ -40,7 +40,7 @@ class MashContainer extends Component {
     const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))}` : 'Top Stories';
     return (
       <div className="mash-container main-content">
-      <h1>{headline} Mash</h1>
+      <div className="headline">{headline} Mash</div>
         <Mash mash={this.props.mash} />
         <div id="mash-canvas"></div>
       </div>

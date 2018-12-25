@@ -5,7 +5,7 @@ const Stories = props => {
   console.log('props.mix', props.mix);
   const stories = !!props.mix.data.length ? props.mix.data : null;
   const content = props.mix.loading
-    ? <div className="loading-message">Mixing it up...</div>
+    ? <div className="loading-message">Mixing up the news...</div>
     : (stories && (
       stories.map(story => {
         return (
