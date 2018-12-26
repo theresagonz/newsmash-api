@@ -10,30 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_24_040135) do
+ActiveRecord::Schema.define(version: 2018_12_25_232355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clouds", force: :cascade do |t|
+  create_table "mashes", force: :cascade do |t|
     t.integer "user_id"
-    t.string "label"
+    t.string "topic"
     t.string "words", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["words"], name: "index_clouds_on_words", using: :gin
-  end
-
-  create_table "stories", force: :cascade do |t|
-    t.string "text"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["words"], name: "index_mashes_on_words", using: :gin
   end
 
 end
