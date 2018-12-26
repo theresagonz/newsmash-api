@@ -12,6 +12,7 @@ const App = () => {
       <React.Fragment>
           <Route path="/" component={Navbar} />
           <Route path="/" component={SearchSidebar} />
+          <Route exact path="/" component={MashContainer} />
           <Route exact path="/mixes" component={MixContainer} />
           <Route path="/mixes/:topic" component={MixContainer} />
           <Route exact path="/mashes" component={MashContainer} />

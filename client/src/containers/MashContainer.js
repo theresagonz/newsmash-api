@@ -10,7 +10,7 @@ const PROPTYPES = {
     words: PropTypes.array,
     loading: PropTypes.bool,
   }),
-  getTopWords: PropTypes.func,
+  getMashWords: PropTypes.func,
   getTopMashes: PropTypes.func,
 };
 
@@ -35,14 +35,32 @@ class MashContainer extends Component {
     }
   }
 
+  handleClick = () => {
+    console.log('in handleclick, this.props :', this.props);
+    const request = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.props.mash)
+    };
+    fetch('/api/v1/mashes', request)
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log('in saveMash, data :', data);
+    // })
+  }
+
   render() {
     const slugifiedTopic = this.props.match.params.topic;
     const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))}` : 'Top Stories';
     return (
       <div className="mash-container main-content">
-      <div className="headline">{headline} Mash</div>
-        <Mash mash={this.props.mash} />
+        <button className="btn btn-secondary save-button" onClick={this.handleClick}>Save this mash</button>
+        <div className="headline">{headline} Mash</div>
         <div id="mash-canvas"></div>
+        <Mash mash={this.props.mash} />
       </div>
     );
   }
