@@ -1,22 +1,24 @@
 const mashReducer = (
   state = 
   {
+    topic: '',
     words: [],
-    loading: false
+    loading: false,
   },
   action ) => {
 
     switch (action.type) {
-      case 'START_GETTING_MASH_DATA_FROM_SERVER':
+      case 'START_FETCH_MASH':
         return {
           ...state,
-          loading: true
+          loading: true,
         };
-      case 'GET_MASH_DATA_FROM_SERVER':
+      case 'FETCH_MASH':
         return {
           ...state,
+          topic: action.topic,
+          words: action.payload.words,
           loading: false,
-          words: action.payload.words
         };
       default:
         return state;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Search from '../components/Search';
-import { searchStoriesAndUpdateStore } from '../actions/mixActions';
+import { fetchMixSearch } from '../actions/mixActions';
 import { getMashWords } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
@@ -10,7 +10,7 @@ class SearchSidebar extends Component {
       <div className="sidebar">
         <Search
           searchType="mix"
-          getContent={this.props.searchStoriesAndUpdateStore}
+          getContent={this.props.fetchMixSearch}
           history={this.props.history}
         />
         <Search
@@ -23,4 +23,4 @@ class SearchSidebar extends Component {
   }
 }
 
-export default connect(null, { searchStoriesAndUpdateStore, getMashWords })(SearchSidebar);
+export default connect(null, { fetchMixSearch, getMashWords })(SearchSidebar);

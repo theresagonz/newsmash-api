@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Search from '../components/Search';
-import { getStoriesAndUpdateStore, searchStoriesAndUpdateStore } from '../actions/mixActions';
+import { fetchMix, fetchMixSearch } from '../actions/mixActions';
 import Mix from '../components/Mix';
 
 const PROPTYPES = {
-  getStoriesAndUpdateStore: PropTypes.func,
+  fetchMix: PropTypes.func,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
@@ -18,16 +18,16 @@ const PROPTYPES = {
     data: PropTypes.array,
     loading: PropTypes.bool,
   }), 
-  searchStoriesAndUpdateStore: PropTypes.func,
+  fetchMixSearch: PropTypes.func,
 };
 
 class MixContainer extends Component {
   componentDidMount(prevProps) {
     const searchTerm = this.props.match.params.topic;
     if (searchTerm) {
-      this.props.searchStoriesAndUpdateStore(searchTerm);
+      this.props.fetchMixSearch(searchTerm);
     } else {
-      this.props.getStoriesAndUpdateStore();
+      this.props.fetchMix();
     }
   }
 
@@ -35,9 +35,9 @@ class MixContainer extends Component {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       const searchTerm = this.props.match.params.topic;
       if (searchTerm) {
-        this.props.searchStoriesAndUpdateStore(searchTerm);
+        this.props.fetchMixSearch(searchTerm);
       } else {
-        this.props.getStoriesAndUpdateStore();
+        this.props.fetchMix();
       }
     }
   }
@@ -60,4 +60,4 @@ const mapStateToProps = state => {
   return ({ mix: state.mix });
 };
 
-export default connect(mapStateToProps, { getStoriesAndUpdateStore, searchStoriesAndUpdateStore })(MixContainer);
+export default connect(mapStateToProps, { fetchMix, fetchMixSearch })(MixContainer);
