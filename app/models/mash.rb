@@ -1,10 +1,14 @@
-class Mash
+class Mash < ApplicationRecord
+  attr_accessor :topic, :words
 
   def initialize(data)
-    @words = data['keywords']
+    binding.pry
+    @words = data[:words]
+    @topic = data[:topic]
   end
 
   def as_json(options = {})
+    binding.pry
     {
       "words" => (
         @words.map do |word|
@@ -33,7 +37,7 @@ class Mash
     'the-new-york-times,bbc-news,the-economist,the-washington-post,the-wall-street-journal,fox-news,breitbart-news,al-jazeera-english,politico,rt,reuters,associated-press,cnn,msnbc,google-news,the-huffington-post'
   end
 
-  def self.getWordStrings(data)
+  def self.getMashString(data)
     data.map do |story|
       story.description
     end

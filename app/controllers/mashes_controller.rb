@@ -7,42 +7,46 @@ class MashesController < ApplicationController
   end
 
   def create
-    @mash = Mash.new(mash_params)
-    if @mash.save
-      render json: @mash.to_json
-    else 
-      render json: @mash.errors
-    end
+    binding.pry
+    # @mash = Mash.new(mash_params)
+    # if @mash.save
+    #   render json: @mash.to_json
+    # else 
+    #   render json: @mash.errors
+    # end
   end
 
   def getTopMashWords
     # Get data using News API's library
-
     newsapi = News.new(ENV['NEWS_API_KEY']);
-    stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', sortBy: 'relevancy')
+    stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', sortBy: 'publishedAt')
+    
+    # Consolidate content into one big string
+    words = Mash.getMashString(stories).join('')
 
-    words = Mash.getWordStrings(stories).join('')
+    # Request keyword analytics from Parallel Dots API
     conn = Faraday.new(url: ENV['TEXT_ANALYSIS_BASE_URL'] + '/keywords')
-
     response = conn.post do |req|
       req.headers['Content-Type'] = 'application/json'
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
       req.params['text'] = words
     end
-
-    @mash = Mash.new(JSON.parse(response.body))
+    binding.pry
+    @mash = Mash.new(words: JSON.parse(response.body)['keywords'], topic: 'top stories')
     render json: @mash.as_json
   end
 
-  def queryMashWords
+  def getSearchMashWords
     searchTerm = params['_json']
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY']);
     stories = newsapi.get_everything(q: searchTerm, sources: Mash.default_sources, language: 'en')
-    
-    words = Mash.getWordStrings(stories).join('')
+
+    # Consolidate content into one big string
+    words = Mash.getMashString(stories).join('')
     conn = Faraday.new(url: ENV['TEXT_ANALYSIS_BASE_URL'] + '/keywords')
-    
+
+    # Request keyword analytics from Parallel Dots API
     response = conn.post do |req|
       req.headers['Content-Type'] = 'application/json'
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
@@ -55,7 +59,7 @@ class MashesController < ApplicationController
 
   private
 
-  # def _params
-  #   params.require(:cloud).permit(:id, :user_id, :label, :words)
-  # end
+  def mash_params
+    params.require(:mash).permit(:topic, :words => [:text, :count])
+  end
 end
