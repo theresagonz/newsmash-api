@@ -31,7 +31,7 @@ class MashesController < ApplicationController
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
       req.params['text'] = words
     end
-    binding.pry
+
     @mash = Mash.new(words: JSON.parse(response.body)['keywords'], topic: 'top stories')
     render json: @mash.as_json
   end
@@ -53,7 +53,8 @@ class MashesController < ApplicationController
       req.params['text'] = words
     end
     
-    @mash = Mash.new(JSON.parse(response.body))
+    # Render formatted mash data at api endpoint
+    @mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'])
     render json: @mash.as_json
   end
 

@@ -2,23 +2,24 @@ class Mash < ApplicationRecord
   attr_accessor :topic, :words
 
   def initialize(data)
-    binding.pry
     @words = data[:words]
     @topic = data[:topic]
   end
 
   def as_json(options = {})
-    binding.pry
-    {
-      "words" => (
-        @words.map do |word|
-          {
-            "text" => word['keyword'],
-            "count" => word['confidence_score']
-          }
-        end
-      )
-    }
+    if @words
+      {
+        "topic" => @topic,
+        "words" => (
+          @words.map do |word|
+            {
+              "text" => word['keyword'],
+              "count" => word['confidence_score']
+            }
+          end
+        )
+      }
+    end
   end
 
   def modify_count(word)
