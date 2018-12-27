@@ -43,7 +43,7 @@ a:active {
 
 .main-content {
   background-color: white;
-  padding: 20px 30px 30px 30px;
+  padding: 40px 30px 30px 30px;
   position: relative;
   top: -350px;
   float: right;
@@ -100,6 +100,15 @@ a:active {
 }
 
 .save-button {
+  font-size: 1.5em;
+  font-family: 'Staatliches', sans-serif;
   position: absolute;
-  left: 75%;
+  top: 10px;
+  right: 30px;
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.hoverDiv:hover {
+  color: rgb(238, 65, 68);
 }

@@ -18,8 +18,10 @@ class MashContainer extends Component {
   componentDidMount(prevProps) {
     const searchTerm = this.props.match.params.topic;
     if (searchTerm) {
+      // debugger
       this.props.getMashWords(searchTerm);
     } else {
+      // debugger
       this.props.getTopMashes();
     }
   }
@@ -46,10 +48,10 @@ class MashContainer extends Component {
       body: JSON.stringify(this.props.mash)
     };
     fetch('/api/v1/mashes', request)
-    // .then(res => res.json())
-    // .then(data => {
-    //   console.log('in saveMash, data :', data);
-    // })
+    .then(res => res.json())
+    .then(data => {
+      console.log('in handleClick, data :', data);
+    })
   }
 
   render() {
@@ -57,8 +59,9 @@ class MashContainer extends Component {
     const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))}` : 'Top Stories';
     return (
       <div className="mash-container main-content">
-        <button className="btn btn-secondary save-button" onClick={this.handleClick}>Save this mash</button>
+        {/* <button className="btn btn-secondary save-button" onClick={this.handleClick}>Save this mash</button> */}
         <div className="headline">{headline} Mash</div>
+        <div className="heart-shape save-button hoverDiv" onClick={this.handleClick}>&hearts; Save</div>
         <div id="mash-canvas"></div>
         <Mash mash={this.props.mash} />
       </div>
