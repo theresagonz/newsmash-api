@@ -7,13 +7,14 @@ class MashesController < ApplicationController
   end
 
   def create
-    binding.pry
-    # @mash = Mash.new(mash_params)
-    # if @mash.save
-    #   render json: @mash.to_json
-    # else 
-    #   render json: @mash.errors
-    # end
+    @mash = Mash.new(topic: mash_params[:topic])
+    @mash['words'] = mash_params['words']
+
+    if @mash.save
+      render json: @mash.to_json
+    else 
+      render json: @mash.errors
+    end
   end
 
   def getTopMashWords
@@ -40,7 +41,7 @@ class MashesController < ApplicationController
     searchTerm = params['_json']
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY']);
-    stories = newsapi.get_everything(q: searchTerm, sources: Mash.default_sources, language: 'en')
+    stories = newsapi.get_everything(q: searchTerm, sources: Mash.default_sources, language: 'en', sortBy: 'publishedAt')
 
     # Consolidate content into one big string
     words = Mash.getMashString(stories).join('')

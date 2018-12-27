@@ -1,17 +1,18 @@
 class Mash < ApplicationRecord
-  attr_accessor :topic, :words
-
-  def initialize(data)
-    @words = data[:words]
-    @topic = data[:topic]
-  end
+  attr_accessor :words
 
   def as_json(options = {})
     if @words
+      if @words.length > 36
+        words = @words[0..35]
+      else
+        words = @words
+      end
+
       {
         "topic" => @topic,
         "words" => (
-          @words.map do |word|
+          words.map do |word|
             {
               "text" => word['keyword'],
               "count" => word['confidence_score']
