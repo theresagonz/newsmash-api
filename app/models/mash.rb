@@ -1,27 +1,5 @@
-class Mash < ApplicationRecord
-  attr_accessor :words
-
-  def as_json(options = {})
-    if @words
-      if @words.length > 36
-        words = @words[0..35]
-      else
-        words = @words
-      end
-
-      {
-        "topic" => @topic,
-        "words" => (
-          words.map do |word|
-            {
-              "text" => word['keyword'],
-              "count" => word['confidence_score']
-            }
-          end
-        )
-      }
-    end
-  end
+class Mash < ActiveModelSerializers::Model
+  attributes :topic, :words
 
   def modify_count(word)
     new_score = word['confidence_score'] * 100

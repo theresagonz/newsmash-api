@@ -1,5 +1,9 @@
+# ActiveModelSerializers.config.adapter = :json_api
+
 class MashesController < ApplicationController
   skip_before_action :verify_authenticity_token
+
+  # attributes :topic, :words
 
   def index
     @mashes = Mash.all
@@ -33,8 +37,8 @@ class MashesController < ApplicationController
       req.params['text'] = words
     end
 
-    @mash = Mash.new(words: JSON.parse(response.body)['keywords'], topic: 'top stories')
-    render json: @mash.as_json
+    mash = Mash.new(topic: 'top stories', words: JSON.parse(response.body)['keywords'])
+    render json: mash
   end
 
   def getSearchMashWords
@@ -55,8 +59,8 @@ class MashesController < ApplicationController
     end
     
     # Render formatted mash data at api endpoint
-    @mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'])
-    render json: @mash.as_json
+    mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'])
+    render json: mash
   end
 
   private
