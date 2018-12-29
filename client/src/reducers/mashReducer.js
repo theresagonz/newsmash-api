@@ -38,6 +38,12 @@ const mashReducer = (
         saving: false,
         recentMashes: mashes,
       };
+    case 'FETCH_RECENT_MASHES':
+      console.log('in reducer, action.payload', action.payload)
+      return  {
+        ...state,
+        recentMashes: action.payload
+      }
     default:
       return state;
   }

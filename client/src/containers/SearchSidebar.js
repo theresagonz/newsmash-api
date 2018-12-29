@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import RecentMashes from '../components/RecentMashes';
 import Search from '../components/Search';
 import { fetchMixSearch } from '../actions/mixActions';
-import { getMashWords } from '../actions/mashActions';
+import { getMashWords, getRecentMashes } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
+  componentDidMount() {
+    // Get recent mashes from api and add to store
+    this.props.getRecentMashes();
+  }
+
   render() {
     return (
       <div className="sidebar">
@@ -18,9 +24,14 @@ class SearchSidebar extends Component {
           getContent={this.props.getMashWords}
           history={this.props.history}
         />
+        <RecentMashes recentMashes={this.props.recentMashes} />
       </div>
     );
   }
 }
 
-export default connect(null, { fetchMixSearch, getMashWords })(SearchSidebar);
+const mapStateToProps = (state) => ({
+  recentMashes: state.mash.recentMashes
+});
+
+export default connect(mapStateToProps, { fetchMixSearch, getMashWords, getRecentMashes })(SearchSidebar);

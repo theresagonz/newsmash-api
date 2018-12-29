@@ -62,3 +62,18 @@ export const saveMash = (data) => {
     .catch(error => console.error(error));
   };
 };
+
+export const getRecentMashes = () => {
+  return (dispatch) => {
+    return fetch('/api/v1/mashes/recent')
+    .then(res => res.json())
+    .then(data => {
+      console.log('in getRecentMashes, data :', data);
+      dispatch({
+        type: 'FETCH_RECENT_MASHES',
+        payload: data,
+      });
+    })
+    .catch(error => console.error(error));
+  };
+};
