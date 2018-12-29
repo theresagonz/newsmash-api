@@ -17,37 +17,22 @@ a:active {
   text-decoration: none;
 }
 
-.navbar {
-  /* background-color: rgb(90, 185, 243, 0.96); */
-}
-
 .navbar-logo {
   display: block;
   margin: 6px 0 10px 25px;
-  /* margin-right: auto; */
 }
 
 .navbar-links {
   float: right;
 }
 
-.sidebar {
-  /* float: left; */
-  padding: 20px 30px 1350px 30px;
-  width: 25%;
-  position: sticky;
-  top: 0px;
-  background-color: lightgrey;
-  margin-bottom: -1350px;
-}
-
 .main-content {
   background-color: white;
   padding: 40px 30px 30px 30px;
-  position: relative;
-  top: -350px;
-  float: right;
-  width: 75%;
+  position: absolute;
+  top: 100px;
+  left: 200px;
+  min-width: 740px;
 }
 
 .headline {
@@ -65,14 +50,29 @@ a:active {
   text-align: center;
 }
 
-.sidebar-form {
-  margin: 0 0 40px 0;
+.sidebar {
+  text-align: center;
+  padding: 20px 30px 1350px 30px;
+  max-width: 200px;
+  position: sticky;
+  top: 0px;
+  background-color: lightgrey;
+  margin-bottom: -1350px;
   text-align: center;
 }
 
-.search-prompt {
+.sidebar-container {
+  margin: 0 0 40px 0;
+}
+
+.sidebar-heading {
   font-size: 1.25em;
   font-family: 'Oswald', sans-serif;
+  margin: 0 0 0.3em 0;
+}
+
+.sidebar-link {
+  font-family: 'Zilla Slab', serif;
 }
 
 .mix-headline {
@@ -103,12 +103,12 @@ a:active {
   font-size: 1.5em;
   font-family: 'Staatliches', sans-serif;
   position: absolute;
-  top: 10px;
-  right: 30px;
+  top: 20px;
+  right: 50px;
   color: lightgrey;
   cursor: pointer;
 }
 
 .hoverDiv:hover {
-  color: rgb(238, 65, 68);
+  color: rgb(187, 33, 36);
 }

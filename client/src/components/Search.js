@@ -41,12 +41,12 @@ class Search extends Component {
 
   render() {
     return (
-      // <div className="search-container">
-        <form className="sidebar-form" onSubmit={this.handleSubmit}>
+      <div className="sidebar-container">
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label className="search-prompt" htmlFor="search_input" >Get a {this.props.searchType}</label>
+            <label className="sidebar-heading" htmlFor="search_input" >Get a {this.props.searchType}</label>
             <input
-              id="search_input"
+              id="search_label"
               type="text"
               value={this.state.text}
               onChange={this.handleChange}
@@ -55,7 +55,7 @@ class Search extends Component {
           </div>
           <input type="submit" className="btn btn-primary" value={`${_.capitalize(this.props.searchType)} it`} />
         </form>
-      // </div>
+      </div>
     );
   }
 }
