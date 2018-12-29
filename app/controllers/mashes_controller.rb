@@ -1,9 +1,5 @@
-# ActiveModelSerializers.config.adapter = :json_api
-
 class MashesController < ApplicationController
   skip_before_action :verify_authenticity_token
-
-  # attributes :topic, :words
 
   def index
     @mashes = Mash.all
@@ -16,7 +12,7 @@ class MashesController < ApplicationController
 
     if @mash.save
       render json: @mash.to_json
-    else 
+    else
       render json: @mash.errors
     end
   end

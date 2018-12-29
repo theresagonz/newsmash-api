@@ -1,5 +1,4 @@
-class Mash < ActiveModelSerializers::Model
-  attributes :topic, :words
+class Mash < ApplicationRecord
 
   def modify_count(word)
     new_score = word['confidence_score'] * 100
