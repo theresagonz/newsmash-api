@@ -3,7 +3,7 @@ class MashesController < ApplicationController
 
   def index
     @mashes = Mash.all
-    render json: @mashes
+    render json: @mashes.as_json
   end
 
   def create
@@ -57,6 +57,11 @@ class MashesController < ApplicationController
     # Render formatted mash data at api endpoint
     mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'])
     render json: mash
+  end
+
+  def getRecentMashes
+    @mashes = Mash.all[-5, 5]
+    render json: @mashes.as_json
   end
 
   private
