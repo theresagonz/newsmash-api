@@ -3,19 +3,24 @@ import React, { Component } from 'react';
 import { core as WordMash } from 'zingchart-react';
 
 const PROPTYPES = {
-  mash: PropTypes.shape({
-    words: PropTypes.array,
+  // mash: PropTypes.shape({
+    topic: PropTypes.string,
+    words: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string,
+      count: PropTypes.number,
+    })),
     loading: PropTypes.bool,
-  })
+    saving: PropTypes.bool,
+  // })
 };
 
 export default class Mash extends Component {
   render() {
+    console.log('in Mash.js, this.props.words', this.props.words)
     const mashConfig = {
       type: 'wordcloud',
       options: {
-        words: this.props.mash.words,
-        aspect: 'spiral',
+        words: this.props.words,
         maxFontSize: 500,
         minFontSize: 10,
         style: {
@@ -31,20 +36,25 @@ export default class Mash extends Component {
         palette: ['#2196F3','#3F51B5','#42A5F5','#5C6BC0','#64B5F6','#7986CB','#90CAF9','#9FA8DA','#BBDEFB','#C5CAE9']
       }
     };
-    console.log('this.props.mash.loading :', this.props.mash.loading);
+    console.log('in Mash.js, this.props :', this.props);
     return (
       <div>
-        {this.props.mash.loading ? (
+        { this.props.loading ? (
           <div className="loading-message">Mashing up the news...</div>
-        ) : (
-        <WordMash
-          id="mash-canvas"
-          height="300"
-          width="100%"
-          data={mashConfig}
-        />
+          ) : (
+            <div>
+            {/* <p>{this.props.words}</p> */}
+            <WordMash
+              id="mash-canvas"
+              height="300"
+              width="100%"
+              data={mashConfig}
+            />
+          </div>
         )}
       </div>
     );
   }
 }
+
+// Mash.propTypes = PROPTYPES;

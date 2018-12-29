@@ -13,10 +13,9 @@ export const getMashWords = (text) => {
     return fetch('/api/v1/mashes/data', request)
       .then(res => res.json())
       .then(data => {
-        // console.log('data :', data);
         return dispatch({
           type: 'FETCH_MASH',
-          topic: text,
+          topic: data.topic,
           payload: data,
         });
       })
@@ -26,18 +25,40 @@ export const getMashWords = (text) => {
 
 export const getTopMashes = () => {
   return (dispatch) => {
-    console.log('in getTopMashes')
     dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/data')
       .then(res => res.json())
       .then(data => {
-        console.log('in getTopMashes, data :', data);
         dispatch({
           type: 'FETCH_MASH',
-          topic: 'top stories',
           payload: data,
         });
       })
       .catch(error => console.error(error));
+  };
+};
+
+export const saveMash = (data) => {
+  console.log('in saveMash action, data :', data);
+  const request = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({topic: data.topic, words: data.words})
+  };  
+  return (dispatch) => {
+    dispatch({ type: 'START_SAVE_MASH'});
+    return fetch('/api/v1/mashes', request)
+    .then(res => res.json())
+    .then(data => {
+      console.log('in saveMash, data :', data);
+      dispatch({
+        type: 'SAVE_MASH',
+        payload: data,
+      });
+    })
+    .catch(error => console.error(error));
   };
 };
