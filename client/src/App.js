@@ -15,8 +15,9 @@ const App = () => {
           <Route exact path="/" component={MashContainer} />
           <Route exact path="/mixes" component={MixContainer} />
           <Route path="/mixes/:topic" component={MixContainer} />
+          <Route path="/mashes/saved/:id" component={MashContainer} />)} />
+          <Route exact path="/mashes/:topic" component={MashContainer} />
           <Route exact path="/mashes" component={MashContainer} />
-          <Route path="/mashes/:topic" component={MashContainer} />
       </React.Fragment>
     </Router>
   );

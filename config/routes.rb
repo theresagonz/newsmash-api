@@ -7,10 +7,10 @@ Rails.application.routes.draw do
       get '/mixes/data', to: 'mixes#getTopStories'
       post '/mixes/data', to: 'mixes#getSearchStories'
 
-      resources :mashes, only: [:create, :index]
-        get '/mashes/data', to: 'mashes#getTopMashWords'
-        post '/mashes/data', to: 'mashes#getSearchMashWords'
-        get '/mashes/recent', to: 'mashes#getRecentMashes'
+      get '/mashes/data', to: 'mashes#getTopMashWords'
+      post '/mashes/data', to: 'mashes#getSearchMashWords'
+      get '/mashes/recent', to: 'mashes#getRecentMashes'
+      resources :mashes, only: [:index, :show, :create]
     end
   end
 end

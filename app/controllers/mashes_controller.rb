@@ -6,6 +6,11 @@ class MashesController < ApplicationController
     render json: @mashes.as_json
   end
 
+  def show
+    @mash = Mash.find(params[:id])
+    render json: @mash.as_json
+  end
+
   def create
     @mash = Mash.new(topic: mash_params[:topic])
     @mash['words'] = mash_params['words']
@@ -61,7 +66,7 @@ class MashesController < ApplicationController
 
   def getRecentMashes
     @mashes = Mash.all[-5, 5]
-    render json: @mashes.as_json
+    render json: @mashes.reverse.as_json(except: [:words])
   end
 
   private
