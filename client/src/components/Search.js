@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { slugify } from '../utils/utilities';
 
 const PROPTYPES = {
   getContent: PropTypes.func,
@@ -36,7 +35,7 @@ class Search extends Component {
 
   searchRedirect = () => {
     const path = this.props.searchType + 'es'
-    this.props.history.push(`/${path}/${slugify(this.state.text)}`);
+    this.props.history.push(`/${path}/${_.kebabCase(this.state.text)}`);
   }
 
   render() {
@@ -44,7 +43,10 @@ class Search extends Component {
       <div className="sidebar-container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label className="sidebar-heading" htmlFor="search_input" >Get a {this.props.searchType}</label>
+            <label
+              className="sidebar-heading"
+              htmlFor="search_input" >Get a {this.props.searchType}
+            </label>
             <input
               id="search_label"
               type="text"
@@ -53,7 +55,11 @@ class Search extends Component {
               className="form-control"
             />
           </div>
-          <input type="submit" className="btn btn-primary" value={`${_.capitalize(this.props.searchType)} it`} />
+          <input
+            type="submit"
+            className="btn btn-primary"
+            value={`${_.capitalize(this.props.searchType)} it`}
+          />
         </form>
       </div>
     );
