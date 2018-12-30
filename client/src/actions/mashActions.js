@@ -65,15 +65,31 @@ export const saveMash = (data) => {
 
 export const getRecentMashes = () => {
   return (dispatch) => {
+    dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/recent')
-    .then(res => res.json())
-    .then(data => {
-      console.log('in getRecentMashes, data :', data);
-      dispatch({
-        type: 'FETCH_RECENT_MASHES',
-        payload: data,
-      });
-    })
-    .catch(error => console.error(error));
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'FETCH_RECENT_MASHES',
+          payload: data,
+        });
+      })
+      .catch(error => console.error(error));
+  };
+};
+
+export const getSavedMash = (id) => {
+  return (dispatch) => {
+    console.log('in getSavedMash')
+    dispatch({ type: 'START_FETCH_MASH'});
+    return fetch(`/api/v1/mashes/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'FETCH_MASH',
+          payload: data,
+        });
+      })
+      .catch(error => console.error(error));
   };
 };
