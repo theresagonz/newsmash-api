@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Mash from '../components/Mash';
-import { getMashWords, getTopMashes, saveMash } from '../actions/mashActions';
+import { getMashWords, getTopMashes, saveMash, getSavedMash } from '../actions/mashActions';
 
 const PROPTYPES = {
   mash: PropTypes.shape({
+    id: PropTypes.number,
     words: PropTypes.array,
     loading: PropTypes.bool,
     saving: PropTypes.bool,
@@ -19,27 +20,32 @@ const PROPTYPES = {
   getMashWords: PropTypes.func,
   getTopMashes: PropTypes.func,
   saveMash: PropTypes.func,
+  getSavedMash: PropTypes.func,
 };
 
 class MashContainer extends Component {
   componentDidMount(prevProps) {
     const searchTerm = this.props.match.params.topic;
+    const mashId = this.props.match.params.id;
+
     if (searchTerm) {
       this.props.getMashWords(searchTerm);
+    } else if (mashId) {
+      this.props.getSavedMash(mashId);
     } else {
       this.props.getTopMashes();
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      const searchTerm = this.props.match.params.topic;
-      if (searchTerm) {
-        this.props.getMashWords(searchTerm);
-      } else {
-        this.props.getTopMashes();
-      }
-    }
+    // if (this.props.location.pathname !== prevProps.location.pathname) {
+    //   const searchTerm = this.props.match.params.topic;
+    //   if (searchTerm) {
+    //     this.props.getMashWords(searchTerm);
+    //   } else {
+    //     this.props.getTopMashes();
+    //   }
+    // }
   }
 
   handleClick = () => {
@@ -48,20 +54,18 @@ class MashContainer extends Component {
   }
 
   render() {
-    // const { loading, saving, words, topic } = this.props;
-    const slugifiedTopic = this.props.match.params.topic;
-    const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))}` : 'Top Stories';
+    const { loading, saving, words, topic } = this.props.mash;
+    
     return (
       <div className="mash-container main-content">
-        <div className="headline">{headline} Mash</div>
         <div className="heart-shape save-button hoverDiv" onClick={this.handleClick}>&hearts; Save</div>
-        <div id="mash-canvas"></div>
         <Mash
-          loading={this.props.mash.loading}
-          saving={this.props.mash.saving}
-          words={this.props.mash.words}
-          topic={this.props.mash.topic}
+          loading={loading}
+          saving={saving}
+          words={words}
+          topic={topic}
           />
+        <div id="mash-canvas"></div>
       </div>
     );
   }
@@ -73,4 +77,4 @@ const mapStateToProps = (state) => {
 
 MashContainer.propTypes = PROPTYPES;
 
-export default connect(mapStateToProps, { getMashWords, getTopMashes, saveMash })(MashContainer);
+export default connect(mapStateToProps, { getMashWords, getTopMashes, saveMash, getSavedMash })(MashContainer);
