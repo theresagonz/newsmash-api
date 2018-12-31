@@ -14,14 +14,16 @@ const PROPTYPES = {
 
 export default class Mash extends Component {
   render() {
-    const { loading, words, topic } = this.props;
-    console.log('in Mash.js, words', words)
+    const { loading, loadingSaved, words, topic } = this.props;
     const mashConfig = {
       type: 'wordcloud',
       options: {
         words: words,
         maxFontSize: 500,
         minFontSize: 10,
+        cache:{
+          data: true,
+        },
         style: {
           fontFamily: 'Zilla Slab',
           hoverState: {
@@ -36,20 +38,17 @@ export default class Mash extends Component {
       }
     };
     console.log('in Mash.js, this.props :', this.props);
-    const headline = topic ? (
-        `${_.startCase(_.replace(topic, /-/g, ' '))}`
-      ) :
-      (
-        'Top Stories'
-      );
-    
+    const headline = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
+
+  const loadingMessage = loadingSaved ? 'Please wait...' : 'Mashing up the news...';
     return (
       <div>
-        <div className="headline">{ headline } Mash</div>
-          { loading ?
+        <div className="headline">{ headline }</div>
+          { loading || loadingSaved ?
             (
-              <div className="loading-message">Mashing up the news...</div>
-            ) :
+              <div className="loading-message">{ loadingMessage }</div>
+            )
+            :
             (
               <div>
                 <WordMash

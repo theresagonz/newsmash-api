@@ -30,36 +30,40 @@ class MashContainer extends Component {
       topic: '',
     };
   }
-  updateRenderedMash(prevProps) {
+
+  async updateRenderedMash(prevProps) {
     const searchTerm = this.props.match.params.topic;
     const mashId = this.props.match.params.id;
-
+    // const mashIsRecent = this.props.mash.recentMashes.find(mash => mash.id === mashId);
+    // console.log('mashIsRecent :', mashIsRecent);
     if (searchTerm) {
       this.setState({ topic: searchTerm });
-      this.props.getMashWords(searchTerm);
+      await this.props.getMashWords(searchTerm);
     } else if (mashId) {
       this.setState({ topic: 'Loading saved' });
-      this.props.getSavedMash(mashId);
-      this.setState({ topic: this.props.mash.topic})
+      await this.props.getSavedMash(mashId);
+      this.setState({ topic: this.props.mashes });
     } else {
-      this.props.getTopMashes();
+      this.setState({ topic: 'Top Stories'});
+      await this.props.getTopMashes();
     }
   }
 
   componentDidMount(prevProps) {
     this.updateRenderedMash(prevProps);
-  } 
+  }
+    
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.updateRenderedMash(prevProps);
     }
   }
 
-  handleClick = () => {
+  handleClick = async() => {
     console.log('in handleclick, this.props.mash :', this.props.mash);
     console.log('this.props.mash.recentMashes[0].id :', this.props.mash.recentMashes[0].id);
-    this.props.saveMash(this.props.mash);
-    this.savedMashRedirect(this.props.mash.recentMashes[0].id + 1);
+    await this.props.saveMash(this.props.mash);
+    this.savedMashRedirect(this.props.mash.recentMashes[0].id );
   }
 
   savedMashRedirect = (id) => {
@@ -84,7 +88,7 @@ class MashContainer extends Component {
           loading={loading}
           loadingSaved={loadingSaved}
           words={words}
-          topic={topic || this.state.topic }
+          topic={ this.state.topic || topic }
           />
         <div id="mash-canvas"></div>
       </div>

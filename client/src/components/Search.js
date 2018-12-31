@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 const PROPTYPES = {
@@ -34,8 +35,10 @@ class Search extends Component {
   }
 
   searchRedirect = () => {
-    const path = this.props.searchType + 'es'
-    this.props.history.push(`/${path}/${_.kebabCase(this.state.text)}`);
+    const path = this.props.searchType + 'es';
+    const { history } = this.props;
+    history.push(`/${path}/${_.kebabCase(this.state.text)}`);
+    // this.props.history.replace({`/${path}` })
   }
 
   render() {
