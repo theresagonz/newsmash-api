@@ -1,6 +1,3 @@
-import cuid from 'cuid';
-export const cuidFn = cuid;
-
 const mixReducer = (
   state = {
     data: [],
