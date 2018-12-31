@@ -22,10 +22,6 @@ a:active {
   margin: 6px 0 10px 25px;
 }
 
-.navbar-links {
-  float: right;
-}
-
 .main-content {
   background-color: white;
   padding: 40px 30px 30px 30px;
@@ -75,6 +71,10 @@ a:active {
   font-family: 'Zilla Slab', serif;
 }
 
+.top-links-container {
+  margin: 0 0 20px 0;
+}
+
 .mix-headline {
   font-family: 'Zilla Slab', serif;
   font-size: 1.2em;
@@ -99,16 +99,24 @@ a:active {
   font-family: 'Roboto', sans-serif;
 }
 
-.save-button {
+.heart-shape {
   font-size: 1.5em;
   font-family: 'Staatliches', sans-serif;
   position: absolute;
   top: 20px;
   right: 50px;
-  color: lightgrey;
+}
+
+.save-button {
+  color: rgb(27, 27, 27);
   cursor: pointer;
+  color: lightgrey;
 }
 
 .hoverDiv:hover {
-  color: rgb(187, 33, 36);
+  color: rgb(213, 55, 58);
+}
+
+.saved-label {
+  color: rgb(213, 55, 58);
 }
