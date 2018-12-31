@@ -1,5 +1,5 @@
 class MashSerializer < ActiveModel::Serializer
-  attributes :topic, :words, :date
+  attributes :id, :topic, :words, :date
   has_many :words, serializer: WordSerializer
 
   def date

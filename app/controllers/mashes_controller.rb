@@ -66,7 +66,7 @@ class MashesController < ApplicationController
 
   def getRecentMashes
     @mashes = Mash.all[-5, 5]
-    render json: @mashes.reverse.as_json(except: [:words])
+    render json: @mashes.reverse.as_json
   end
 
   private

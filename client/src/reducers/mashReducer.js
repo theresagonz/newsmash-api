@@ -16,8 +16,10 @@ const mashReducer = (
     case 'FETCH_MASH':
       return {
         ...state,
+        id: action.payload.id,
         topic: action.payload.topic,
         words: action.payload.words,
+        createdAt: action.payload.createdAt,
         loading: false,
         loadingSaved: false,
       };
@@ -37,6 +39,7 @@ const mashReducer = (
       };
     case 'FETCH_RECENT_MASHES':
       console.log('in reducer, action.payload', action.payload)
+      console.log('IN FETCH RECENT', state)
       return {
         ...state,
         recentMashes: action.payload
