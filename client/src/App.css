@@ -17,9 +17,19 @@ a:active {
   text-decoration: none;
 }
 
-.navbar-logo {
-  display: block;
-  margin: 6px 0 10px 25px;
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.navbar-item {
+  margin: 0 30px;
+}
+
+.btn {
+  font-family: 'Oswald  ', sans-serif;
 }
 
 .main-content {
@@ -62,17 +72,19 @@ a:active {
 }
 
 .sidebar-heading {
-  font-size: 1.25em;
-  font-family: 'Oswald', sans-serif;
-  margin: 0 0 0.3em 0;
+  font-size: 1.5em;
+  font-family: 'Staatliches', sans-serif;
+  margin: 0 0 0.5em 0;
 }
 
 .sidebar-link {
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2em;
+  line-height: 1.7em;
 }
 
 .top-links-container {
-  margin: 0 0 20px 0;
+  margin: 1.5em 0 2em 0;
 }
 
 .mix-headline {

@@ -1,16 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import Search from './Search';
+import { fetchMixSearch } from '../actions/mixActions';
+import { getMashWords } from '../actions/mashActions';
 
-const Navbar = () => {
-  return (
-    <div className="navbar navbar-dark bg-dark">
-      <nav>
-        <div className="navbar-logo">
-          <img src="/logo-white.png" alt="newsmash-logo" />
-        </div>
-      </nav>
-    </div>
-  );
+class Navbar extends Component {
+  render() {
+    return (
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark navbar-container">
+          <div className="navbar-item">
+            <img src="/logo-white.png" alt="newsmash-logo" />
+          </div>
+          <div className="navbar-item">
+            <Search
+              fetchMixSearch={this.props.fetchMixSearch}
+              fetchMashSearch={this.props.getMashWords}
+              history={this.props.history}
+            />
+          </div>
+        </nav>
+      </div>
+    );
+  }
 };
 
-export default Navbar;
+export default connect(null, { fetchMixSearch, getMashWords })(Navbar);

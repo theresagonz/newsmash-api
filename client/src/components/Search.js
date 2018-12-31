@@ -48,27 +48,29 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="sidebar-container">
-        <div className="form-group">
+      <div>
+        <form className="form-inline">
+          <div className="form-group">
+            <input
+              type="text"
+              value={this.state.text}
+              onChange={this.handleChange}
+              className="form-control mr-sm-2"
+            />
+          </div>
           <input
-            type="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-            className="form-control"
+            type="submit"
+            className="btn btn-secondary mr-sm-2"
+            value={'Mix it'}
+            onClick={this.handleMixRequest}
           />
-        </div>
-        <input
-          type="submit"
-          className="btn btn-primary"
-          value={'Mash it'}
-          onClick={this.handleMashRequest}
-        />
-        <input
-          type="submit"
-          className="btn btn-primary"
-          value={'Mix it'}
-          onClick={this.handleMixRequest}
-        />
+          <input
+            type="submit"
+            className="btn btn-secondary"
+            value={'Mash it'}
+            onClick={this.handleMashRequest}
+          />
+        </form>
       </div>
     );
   }

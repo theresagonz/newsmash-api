@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecentMashes from '../components/RecentMashes';
-import Search from '../components/Search';
 import TopLinks from '../components/TopLinks';
-import { fetchMixSearch } from '../actions/mixActions';
-import { getMashWords, getRecentMashes } from '../actions/mashActions';
+import { getRecentMashes } from '../actions/mashActions';
 
 class SearchSidebar extends Component {
   componentDidMount() {
@@ -21,11 +19,6 @@ class SearchSidebar extends Component {
     return (
       <div className="sidebar">
         <TopLinks />
-        <Search
-          fetchMixSearch={this.props.fetchMixSearch}
-          fetchMashSearch={this.props.getMashWords}
-          history={this.props.history}
-        />
         <RecentMashes recentMashes={this.props.recentMashes} />
       </div>
     );
@@ -36,4 +29,4 @@ const mapStateToProps = (state) => ({
   recentMashes: state.mash.recentMashes
 });
 
-export default connect(mapStateToProps, { fetchMixSearch, getMashWords, getRecentMashes })(SearchSidebar);
+export default connect(mapStateToProps, { getRecentMashes })(SearchSidebar);
