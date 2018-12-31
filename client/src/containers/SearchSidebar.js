@@ -22,13 +22,8 @@ class SearchSidebar extends Component {
       <div className="sidebar">
         <TopLinks />
         <Search
-          searchType="mix"
-          getContent={this.props.fetchMixSearch}
-          history={this.props.history}
-        />
-        <Search
-          searchType="mash"
-          getContent={this.props.getMashWords}
+          fetchMixSearch={this.props.fetchMixSearch}
+          fetchMashSearch={this.props.getMashWords}
           history={this.props.history}
         />
         <RecentMashes recentMashes={this.props.recentMashes} />

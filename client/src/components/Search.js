@@ -29,41 +29,46 @@ class Search extends Component {
     // sets store state using search data in local component state
     this.props.getContent(this.state.text);
     this.searchRedirect();
+  
+  }
+
+  handleMashRequest = () => {
+    this.props.history.push(`/mashes/${_.kebabCase(this.state.text)}`);
     this.setState({
       text: ''
     });
   }
 
-  searchRedirect = () => {
-    const path = this.props.searchType + 'es';
-    const { history } = this.props;
-    history.push(`/${path}/${_.kebabCase(this.state.text)}`);
-    // this.props.history.replace({`/${path}` })
+  handleMixRequest = () => {
+    this.props.history.push(`/mixes/${_.kebabCase(this.state.text)}`);
+    this.setState({
+      text: ''
+    });
   }
 
   render() {
     return (
       <div className="sidebar-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label
-              className="sidebar-heading"
-              htmlFor="search_input" >Get a {this.props.searchType}
-            </label>
-            <input
-              id="search_label"
-              type="text"
-              value={this.state.text}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
+        <div className="form-group">
           <input
-            type="submit"
-            className="btn btn-primary"
-            value={`${_.capitalize(this.props.searchType)} it`}
+            type="text"
+            value={this.state.text}
+            onChange={this.handleChange}
+            className="form-control"
           />
-        </form>
+        </div>
+        <input
+          type="submit"
+          className="btn btn-primary"
+          value={'Mash it'}
+          onClick={this.handleMashRequest}
+        />
+        <input
+          type="submit"
+          className="btn btn-primary"
+          value={'Mix it'}
+          onClick={this.handleMixRequest}
+        />
       </div>
     );
   }
