@@ -4,7 +4,7 @@ const mashReducer = (
     words: [],
     recentMashes: [],
     loading: false,
-    saving: false,
+    loadingSaved: false,
   },
   action) => {
   switch (action.type) {
@@ -19,20 +19,17 @@ const mashReducer = (
         topic: action.payload.topic,
         words: action.payload.words,
         loading: false,
+        loadingSaved: false,
       };
-    case 'START_SAVE_MASH':
+    case 'START_FETCH_SAVED_MASH':
       return {
         ...state,
-        saving: true,
+        loadingSaved: true,
       };
     case 'SAVE_MASH':
-      const mashContent = {
-        topic: action.payload.topic,
-        words: action.payload.words
-      };
       const mashes = state.recentMashes.length < 5
-        ? [...state.recentMashes, mashContent]
-        : [...state.recentMashes.slice(1, 6), mashContent];
+        ? [action.payload, ...state.recentMashes]
+        : [action.payload, ...state.recentMashes.slice(1, 6)];
       return {
         ...state,
         saving: false,
@@ -40,10 +37,10 @@ const mashReducer = (
       };
     case 'FETCH_RECENT_MASHES':
       console.log('in reducer, action.payload', action.payload)
-      return  {
+      return {
         ...state,
         recentMashes: action.payload
-      }
+      };
     default:
       return state;
   }

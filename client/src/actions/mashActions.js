@@ -46,7 +46,7 @@ export const saveMash = (data) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({topic: data.topic, words: data.words})
+    body: JSON.stringify(data)
   };  
   return (dispatch) => {
     dispatch({ type: 'START_SAVE_MASH'});
@@ -81,7 +81,7 @@ export const getRecentMashes = () => {
 export const getSavedMash = (id) => {
   return (dispatch) => {
     console.log('in getSavedMash')
-    dispatch({ type: 'START_FETCH_MASH'});
+    dispatch({ type: 'START_FETCH_SAVED_MASH'});
     return fetch(`/api/v1/mashes/${id}`)
       .then(res => res.json())
       .then(data => {
