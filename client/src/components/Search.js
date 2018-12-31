@@ -27,9 +27,8 @@ class Search extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // sets store state using search data in local component state
-    this.props.getContent(this.state.text);
-    this.searchRedirect();
-  
+    // this.props.getContent(this.state.text);
+    // this.searchRedirect();
   }
 
   handleMashRequest = () => {
@@ -49,7 +48,7 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form className="form-inline">
+        <form className="form-inline" onSubmit={this.handleSubmit} >
           <div className="form-group">
             <input
               type="text"
