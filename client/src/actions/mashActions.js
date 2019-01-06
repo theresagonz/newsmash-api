@@ -13,7 +13,7 @@ export const getMashWords = (text) => {
     return fetch('/api/v1/mashes/data', request)
       .then(res => res.json())
       .then(data => {
-        return dispatch({
+        dispatch({
           type: 'FETCH_MASH',
           topic: data.topic,
           payload: data,
@@ -65,12 +65,11 @@ export const saveMash = (data) => {
 
 export const getRecentMashes = () => {
   return (dispatch) => {
-    dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/recent')
       .then(res => res.json())
       .then(data => {
         dispatch({
-          type: 'FETCH_RECENT_MASHES',
+          type: 'FETCH_RECENT_MASH_LIST',
           payload: data,
         });
       })
@@ -80,7 +79,6 @@ export const getRecentMashes = () => {
 
 export const getSavedMash = (id) => {
   return (dispatch) => {
-    console.log('in getSavedMash')
     dispatch({ type: 'START_FETCH_SAVED_MASH'});
     return fetch(`/api/v1/mashes/${id}`)
       .then(res => res.json())
@@ -91,5 +89,14 @@ export const getSavedMash = (id) => {
         });
       })
       .catch(error => console.error(error));
+  };
+};
+
+export const setTopic = (topic) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_TOPIC',
+      payload: topic,
+    });
   };
 };
