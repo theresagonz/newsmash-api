@@ -43,8 +43,8 @@ class MashContainer extends Component {
       this.props.setTopic(topic);
       await this.props.getSavedMash(mashId);
     } else {
-      this.setState({ topic: 'Top Stories'});
-      await this.props.getTopMashes();
+      this.props.setTopic('Top Stories');
+      this.props.getTopMashes();
     }
   }
 
@@ -58,9 +58,15 @@ class MashContainer extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(this.props.mash.words === nextProps.mash.words
+      && this.props.mash.topic === nextProps.mash.topic
+      && this.props.match.url === nextProps.match.url);
+  }
+
   handleClick = async() => {
-    this.props.saveMash(this.props.mash);
-    this.savedMashRedirect(this.props.mash.recentMashes[0].id );
+    await this.props.saveMash(this.props.mash);
+    this.savedMashRedirect(this.props.mash.recentMashes[0].id);
   }
 
   savedMashRedirect = (id) => {
@@ -69,28 +75,37 @@ class MashContainer extends Component {
 
   render() {
     const { loadingNew, loadingSaved, words, topic } = this.props.mash;
+    // debugger;
     // if loading saved mash, display 'saved', otherwise display save link
-    const saveButton   = this.props.match.params.id ?
-    (
-      <div className="heart-shape saved-label">&hearts; Saved</div>
-    ) :
-    (
-      <div className="heart-shape save-button hover-div" onClick={this.handleClick}>&hearts; Save</div>
-    );
+    const saveButton = this.props.match.params.id ?
+      (
+        <div className="heart-shape saved-label">&hearts; Saved</div>
+      ) :
+      (
+        <div className="heart-shape save-button hover-div" onClick={this.handleClick}>&hearts; Save</div>
+      );
     const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
-    const loadingMessage = loadingNew || loadingSaved ? 'Mashing up the news...' : '';
+    let loadingMessage;
+    if (loadingNew) {
+      loadingMessage = 'Mashing up the news...';
+    } else if (loadingSaved) {
+      loadingMessage = 'Please wait...';
+    }
+    const mashDisplay = loadingMessage ?
+      (
+        <div className="loading-message">{ loadingMessage }</div>
+      ) : 
+      (
+      <Mash
+        words={words}
+        />
+      );
+
     return (
       <div className="mash-container main-content">
         { saveButton }
         <div className="headline">{ topicTitleCase }</div>
-          { loadingMessage ?
-            (
-              <div className="loading-message">{ loadingMessage }</div>
-            ) : 
-            <Mash
-              words={words}
-              />
-          }
+        { mashDisplay }
         <div id="mash-canvas"></div>
       </div>
     );

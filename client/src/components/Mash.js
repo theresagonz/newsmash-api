@@ -10,10 +10,6 @@ const PROPTYPES = {
 };
 
 export default class Mash extends Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(this.props.words === nextProps.words);
-  }
-  
   render() {
     const mashConfig = {
       type: 'wordcloud',
