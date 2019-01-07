@@ -6,15 +6,18 @@ const mashReducer = (
     loadingNew: false,
     loadingSaved: false,
     saving: false,
+    error: false,
   },
   action) => {
   switch (action.type) {
     case 'START_FETCH_MASH':
       return {
         ...state,
+        words: [],
         loadingNew: true,
         loadingSaved: false,
         saving: false,
+        error: false,
       };
     case 'FETCH_MASH':
       return {
@@ -25,10 +28,12 @@ const mashReducer = (
         createdAt: action.payload.createdAt,
         loadingNew: false,
         loadingSaved: false,
+        error: false,
       };
     case 'START_FETCH_SAVED_MASH':
       return {
         ...state,
+        words: [],
         loadingSaved: true,
         loadingNew: false,
         saving: false,
@@ -60,6 +65,12 @@ const mashReducer = (
         ...state,
         topic: action.payload,
       };
+    case 'SET_ERROR':
+      return ({
+        ...state,
+        loadingNew: false,
+        error: true,
+      });
     default:
       return state;
   }

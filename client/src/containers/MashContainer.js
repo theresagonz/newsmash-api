@@ -16,6 +16,7 @@ const PROPTYPES = {
     topic: PropTypes.string,
     loadingSaved: PropTypes.bool,
     saving: PropTypes.bool,
+    error: PropTypes.string,
     recentMashes: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string,
       count: PropTypes.number,
@@ -30,7 +31,7 @@ const PROPTYPES = {
 
 class MashContainer extends Component {
 
-  async updateRenderedMash(prevProps) {
+  updateRenderedMash(prevProps) {
     const searchTerm = this.props.match.params.topic;
     const mashId = this.props.match.params.id;
 
@@ -41,7 +42,7 @@ class MashContainer extends Component {
       const recentMash = this.props.mash.recentMashes.find(mash => mash.id === parseInt(mashId));
       const topic = recentMash ? recentMash.topic : 'Loading saved';
       this.props.setTopic(topic);
-      await this.props.getSavedMash(mashId);
+      this.props.getSavedMash(mashId);
     } else {
       this.props.setTopic('Top Stories');
       this.props.getTopMashes();
@@ -51,18 +52,20 @@ class MashContainer extends Component {
   componentDidMount(prevProps) {
     this.updateRenderedMash(prevProps);
   }
-    
+  
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.updateRenderedMash(prevProps);
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !(this.props.mash.words === nextProps.mash.words
-      && this.props.mash.topic === nextProps.mash.topic
-      && this.props.match.url === nextProps.match.url);
-  }
+  // Working on preventing rerender on save
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !(this.props.mash.words === nextProps.mash.words
+  //     && this.props.mash.topic === nextProps.mash.topic
+  //     && this.props.location.pathname === nextProps.location.pathname
+  // }
 
   handleClick = async() => {
     await this.props.saveMash(this.props.mash);
@@ -74,24 +77,28 @@ class MashContainer extends Component {
   }
 
   render() {
-    const { loadingNew, loadingSaved, words, topic } = this.props.mash;
-    // debugger;
+    const { loadingNew, loadingSaved, saving, words, topic, error } = this.props.mash;
     // if loading saved mash, display 'saved', otherwise display save link
-    const saveButton = this.props.match.params.id ?
+    let saveButton = this.props.match.params.id ?
       (
         <div className="heart-shape saved-label">&hearts; Saved</div>
       ) :
       (
         <div className="heart-shape save-button hover-div" onClick={this.handleClick}>&hearts; Save</div>
       );
+    if (saving) {
+      saveButton = <div className="heart-shape saved-label">&hearts; Saving</div>;
+    }
     const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
     let loadingMessage;
     if (loadingNew) {
       loadingMessage = 'Mashing up the news...';
     } else if (loadingSaved) {
       loadingMessage = 'Please wait...';
+    } else if (error) {
+      loadingMessage = 'Hmmm nothing found. Try searching again.';
     }
-    const mashDisplay = loadingMessage ?
+    let mashDisplay = loadingMessage ?
       (
         <div className="loading-message">{ loadingMessage }</div>
       ) : 

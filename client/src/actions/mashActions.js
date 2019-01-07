@@ -19,7 +19,11 @@ export const getMashWords = (text) => {
           payload: data,
         });
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        dispatch({
+          type: 'SET_ERROR',
+        });
+      });
   };
 };
 
@@ -97,6 +101,14 @@ export const setTopic = (topic) => {
     dispatch({
       type: 'SET_TOPIC',
       payload: topic,
+    });
+  };
+};
+
+export const setError = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_ERROR',
     });
   };
 };
