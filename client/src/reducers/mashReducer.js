@@ -8,7 +8,8 @@ const mashReducer = (
     saving: false,
     error: false,
   },
-  action) => {
+  action
+) => {
   switch (action.type) {
     case 'START_FETCH_MASH':
       return {
@@ -46,9 +47,10 @@ const mashReducer = (
         loadingNew: false,
       };
     case 'SAVE_MASH':
-      const mashes = state.recentMashes.length < 5 ?
-        [action.payload, ...state.recentMashes] :
-        [action.payload, ...state.recentMashes.slice(1, 6)];
+      const mashes =
+        state.recentMashes.length < 5
+          ? [action.payload, ...state.recentMashes]
+          : [action.payload, ...state.recentMashes.slice(0, 4)];
       return {
         ...state,
         saving: false,
@@ -66,11 +68,11 @@ const mashReducer = (
         topic: action.payload,
       };
     case 'SET_ERROR':
-      return ({
+      return {
         ...state,
         loadingNew: false,
         error: true,
-      });
+      };
     default:
       return state;
   }
