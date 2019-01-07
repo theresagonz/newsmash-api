@@ -27,7 +27,7 @@ export const getMashWords = (text) => {
   };
 };
 
-export const getTopMashes = () => {
+export const getTopMash = () => {
   return (dispatch) => {
     dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/data')
@@ -43,7 +43,6 @@ export const getTopMashes = () => {
 };
 
 export const saveMash = (data) => {
-  console.log('in saveMash action, data :', data);
   const request = {
     method: 'POST',
     headers: {
@@ -57,7 +56,6 @@ export const saveMash = (data) => {
     return fetch('/api/v1/mashes', request)
     .then(res => res.json())
     .then(data => {
-      console.log('in saveMash, data :', data);
       dispatch({
         type: 'SAVE_MASH',
         payload: data,
