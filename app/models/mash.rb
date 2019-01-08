@@ -16,6 +16,18 @@ class Mash < ApplicationRecord
     'the-new-york-times,bbc-news,the-economist,the-washington-post,the-wall-street-journal,fox-news,breitbart-news,al-jazeera-english,politico,rt,reuters,associated-press,cnn,msnbc,google-news,the-huffington-post'
   end
 
+  def self.filter_text(data)
+    filtered_data = data.map do |story|
+      if !!story.content
+        story.content.replace(/\[(.*?)\]/, '')
+      else
+        story.description
+      end
+    end
+    binding.pry
+    filtered_data
+  end
+
   def self.getMashString(data)
     data.map do |story|
       story.description
