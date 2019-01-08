@@ -3,7 +3,6 @@ body {
   color: #343a41;
   /* background-color: rgb(249, 246, 174); */
   font-family: 'Roboto', sans-serif;
-
 }
 
 .container {
@@ -22,6 +21,7 @@ a:active {
   align-items: center;
   justify-content: space-between;
   height: 100px;
+  width: 100%;
 }
 
 .navbar-item {
@@ -29,7 +29,7 @@ a:active {
 }
 
 .btn {
-  font-family: 'Oswald  ', sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 .main-content {
@@ -54,6 +54,7 @@ a:active {
   font-style: italic;
   margin: 1.5em 0;
   text-align: center;
+  vertical-align: center;
 }
 
 .sidebar {
@@ -85,6 +86,10 @@ a:active {
 
 .top-links-container {
   margin: 1.5em 0 2em 0;
+}
+
+.mix-container {
+  margin: 0 25px;
 }
 
 .mix-headline {
@@ -125,10 +130,10 @@ a:active {
   color: lightgrey;
 }
 
-.hoverDiv:hover {
+.hover-div:hover {
   color: rgb(213, 55, 58);
 }
 
-.saved-label {
+.saved-label, .saving-label {
   color: rgb(213, 55, 58);
 }
