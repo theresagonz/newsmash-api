@@ -12,18 +12,12 @@ const PROPTYPES = {
 };
 
 export default class Mash extends Component {
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   debugger;
-  //   return !(nextProps.words === this.props.words);
-  // }
-
   render() {
-    const { saving, id } = this.props;
     const mashConfig = {
       type: 'wordcloud',
       options: {
         words: this.props.words,
-        stepRadius: 65,
+        stepRadius: 55,
         stepAngle: 10,
         width: '100%',
         height: '100%',
@@ -56,32 +50,9 @@ export default class Mash extends Component {
       },
     };
 
-    const handleClick = async () => {
-      const { mash, saveMash, history } = this.props;
-      await saveMash(mash);
-      history.push(`/mashes/saved/${this.props.recentMashes[0].id}`);
-    };
-
-    let saveElement;
-    if (saving) {
-      saveElement = (
-        <div className="heart-shape saving-label">&hearts; Saving</div>
-      );
-    } else if (id) {
-      saveElement = (
-        <div className="heart-shape saved-label">&hearts; Saved</div>
-      );
-    } else {
-      saveElement = (
-        <div className="heart-shape save-button hover-div" onClick={handleClick}>
-          &hearts; Save
-        </div>
-      );
-    }
 
     return (
       <div>
-        {saveElement}
         <WordMash
           id="mash-canvas"
           height="400"
