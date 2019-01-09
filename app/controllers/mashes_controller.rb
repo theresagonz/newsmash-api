@@ -1,6 +1,5 @@
 class MashesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  baseUrl = 'https://apis.paralleldots.com/v3'
 
   def index
     @mashes = Mash.all
@@ -32,8 +31,7 @@ class MashesController < ApplicationController
     text = Mash.getMashString(stories)
 
     # Request keyword analytics from Parallel Dots API
-    conn = Faraday.new(url: baseUrl + '/keywords')
-    
+    conn = Faraday.new(url: 'https://apis.paralleldots.com/v3/keywords')
     response = conn.post do |req|
       req.headers['Content-Type'] = 'application/json'
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
@@ -58,7 +56,7 @@ class MashesController < ApplicationController
 
     text = Mash.getMashString(stories)
 
-    conn = Faraday.new(url: baseUrl + '/keywords')
+    conn = Faraday.new(url: 'https://apis.paralleldots.com/v3/keywords')
     response = conn.post do |req|
       req.headers['Content-Type'] = 'application/json'
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']

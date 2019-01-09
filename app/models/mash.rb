@@ -1,6 +1,6 @@
 class Mash < ApplicationRecord
   def self.default_sources
-    'la-times'
+    'the-new-york-times,bbc-news,the-economist,the-washington-post,the-wall-street-journal,fox-news,al-jazeera-english,politico,rt,reuters,associated-press,cnn,msnbc'
   end
 
   def self.filter_text(text)
