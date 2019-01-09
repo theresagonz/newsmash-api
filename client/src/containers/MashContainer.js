@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import SaveElement from '../components/SaveElement';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Mash from '../components/Mash';
@@ -9,6 +10,7 @@ import {
   saveMash,
   getSavedMash,
   setTopic,
+  setSaved,
 } from '../actions/mashActions';
 
 const PROPTYPES = {
@@ -24,6 +26,7 @@ const PROPTYPES = {
     topic: PropTypes.string,
     loadingSaved: PropTypes.bool,
     saving: PropTypes.bool,
+    saved: PropTypes.bool,
     error: PropTypes.bool,
     recentMashes: PropTypes.arrayOf(
       PropTypes.shape({
@@ -37,6 +40,7 @@ const PROPTYPES = {
   saveMash: PropTypes.func,
   getSavedMash: PropTypes.func,
   setTopic: PropTypes.func,
+  setSaved: PropTypes.func,
 };
 
 class MashContainer extends Component {
@@ -48,7 +52,6 @@ class MashContainer extends Component {
     if (topic) {
       setTopic(topic);
       getMashWords(topic);
-
     } else if (id) {
       const recentMash = recentMashes.find(mash => mash.id === parseInt(id));
       const topic = recentMash ? recentMash.topic : 'Loading saved';
@@ -70,14 +73,6 @@ class MashContainer extends Component {
     }
   }
 
-  // Working on preventing rerender on save
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return !(this.props.mash.words === nextProps.mash.words
-  //     && this.props.mash.topic === nextProps.mash.topic
-  //     && this.props.location.pathname === nextProps.location.pathname
-  // }
-
   render() {
     const {
       loadingNew,
@@ -86,10 +81,13 @@ class MashContainer extends Component {
       words,
       topic,
       error,
+      saved,
     } = this.props.mash;
     const { id } = this.props.match.params;
-    const { mash, recentMashes, saveMash, history } = this.props;
-
+    const { mash, recentMashes, saveMash, history, setSaved } = this.props;
+    
+    const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
+    
     let loadingMessage;
     if (loadingNew) {
       loadingMessage = 'Mashing up the news...';
@@ -107,11 +105,18 @@ class MashContainer extends Component {
       />
     );
 
-    const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
-
     return (
       <div className="mash-container main-content">
         <div className="headline">{topicTitleCase}</div>
+        <SaveElement
+          saving={saving}
+          id={id}
+          mash={mash}
+          saveMash={saveMash}
+          setSaved={setSaved}
+          saved={saved}
+          recentMashes={recentMashes}
+        />
         {mashDisplay}
         <div id="mash-canvas" />
       </div>
@@ -127,5 +132,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getMashWords, getTopMash, saveMash, getSavedMash, setTopic }
+  { getMashWords, getTopMash, saveMash, getSavedMash, setTopic, setSaved }
 )(MashContainer);

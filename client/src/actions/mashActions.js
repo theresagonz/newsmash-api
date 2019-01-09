@@ -38,11 +38,17 @@ export const getTopMash = () => {
           payload: data,
         });
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        dispatch({
+          type: 'SET_ERROR',
+        });
+      });
   };
 };
 
 export const saveMash = (data) => {
+  console.log('DATA', data)
   const request = {
     method: 'POST',
     headers: {
@@ -99,6 +105,14 @@ export const setTopic = (topic) => {
     dispatch({
       type: 'SET_TOPIC',
       payload: topic,
+    });
+  };
+};
+
+export const setSaved = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'SET_SAVED',
     });
   };
 };

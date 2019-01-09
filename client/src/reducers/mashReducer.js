@@ -6,6 +6,7 @@ const mashReducer = (
     loadingNew: false,
     loadingSaved: false,
     saving: false,
+    saved: false,
     error: false,
   },
   action
@@ -18,6 +19,7 @@ const mashReducer = (
         loadingNew: true,
         loadingSaved: false,
         saving: false,
+        saved: false,
         error: false,
       };
     case 'FETCH_MASH':
@@ -38,6 +40,7 @@ const mashReducer = (
         loadingSaved: true,
         loadingNew: false,
         saving: false,
+        saved: false,
       };
     case 'START_SAVE_MASH':
       return {
@@ -50,10 +53,11 @@ const mashReducer = (
       const mashes =
         state.recentMashes.length < 5
           ? [action.payload, ...state.recentMashes]
-          : [action.payload, ...state.recentMashes.slice(0, 4)];
+          : [action.payload, ...state.recentMashes.slice(0, 9)];
       return {
         ...state,
         saving: false,
+        saved: true,
         recentMashes: mashes,
       };
     case 'FETCH_RECENT_MASH_LIST':
@@ -67,10 +71,16 @@ const mashReducer = (
         ...state,
         topic: action.payload,
       };
+    case 'SET_SAVED':
+      return {
+        ...state,
+        saved: true,
+      };
     case 'SET_ERROR':
       return {
         ...state,
         loadingNew: false,
+        saved: false,
         error: true,
       };
     default:
