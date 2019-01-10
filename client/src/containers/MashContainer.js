@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import Mash from '../components/Mash';
 import SaveElement from '../components/SaveElement';
@@ -47,16 +48,16 @@ const PROPTYPES = {
 
 class MashContainer extends Component {
   componentDidMount() {
-    this.updateRenderedMash();
+    this.renderMash();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.updateRenderedMash();
+      this.renderMash();
     }
   }
 
-  updateRenderedMash() {
+  renderMash() {
     const { topic, id } = this.props.match.params;
     const { getTopMash, getMashWords } = this.props;
 
@@ -83,14 +84,7 @@ class MashContainer extends Component {
   }
 
   render() {
-    const {
-      topic,
-      words,
-      loading,
-      saving,
-      saved,
-      error,
-    } = this.props.mash;
+    const { topic, words, loading, saving, saved, error } = this.props.mash;
     const { id } = this.props.match.params;
     const { mash, recentMashes, saveMash, setSaved } = this.props;
 
@@ -111,12 +105,29 @@ class MashContainer extends Component {
       mashDisplay = <Mash words={words} />;
     }
 
+    let mixLink;
+    if (this.props.match.params.topic) {
+      mixLink = this.props.match.params.topic;
+    } else if (topic === 'top stories') {
+      mixLink = '';
+    } else if (saved) {
+      mixLink = _.kebabCase(topic);
+    } else {
+      mixLink = '';
+    }
+    
     return (
       <div className="mash-container main-content">
         <div className="headline">{topicTitleCase}</div>
         <SaveElement
           {...{ id, mash, saving, saved, saveMash, setSaved, recentMashes }}
         />
+        <Link
+          to={`/mixes/${mixLink}`}
+          className="toggle-button"
+        >
+          Get mix
+        </Link>
         {mashDisplay}
         <div id="mash-canvas" />
       </div>

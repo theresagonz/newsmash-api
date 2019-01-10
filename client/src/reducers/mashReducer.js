@@ -75,6 +75,7 @@ const mashReducer = (
         ...state,
         words: action.payload,
         error: false,
+        saved: true,
       };
     case 'SET_TOPIC':
       return {
