@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import Mash from '../components/Mash';
 import SaveElement from '../components/SaveElement';
+import LoadingSpinner from '../components/LoadingSpinner';
 import {
   getMashWords,
   getTopMash,
@@ -59,6 +60,7 @@ class MashContainer extends Component {
   updateRenderedMash() {
     const { topic, id } = this.props.match.params;
     const { getTopMash, getMashWords } = this.props;
+
     if (topic) {
       getMashWords(topic);
     } else if (id) {
@@ -98,18 +100,15 @@ class MashContainer extends Component {
       ? `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`
       : 'Just a moment...';
 
-    let loadingMessage;
-    if (loadingNew) {
-      loadingMessage = 'Mashing up the news...';
-    } else if (loadingSaved) {
-      loadingMessage = 'Loading saved mash';
-    } else if (error) {
-      loadingMessage = 'Something is amiss. Please try again.';
-    }
-
     let mashDisplay;
-    if (loadingMessage) {
-      mashDisplay = <div className="loading-message">{loadingMessage}</div>;
+    if (loadingNew || loadingSaved) {
+      mashDisplay = <LoadingSpinner />;
+    } else if (error) {
+      mashDisplay = (
+        <div className="loading-message">
+          Something is amiss. Please try again.
+        </div>
+      );
     } else {
       mashDisplay = <Mash words={words} />;
     }
