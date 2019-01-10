@@ -28,26 +28,27 @@ const mashReducer = (
         id: action.payload.id,
         topic: action.payload.topic,
         words: action.payload.words,
-        createdAt: action.payload.createdAt,
         loadingNew: false,
         loadingSaved: false,
-        error: false,
       };
     case 'START_FETCH_SAVED_MASH':
       return {
         ...state,
         words: [],
-        loadingSaved: true,
         loadingNew: false,
+        loadingSaved: true,
         saving: false,
         saved: false,
+        error: false,
       };
     case 'START_SAVE_MASH':
       return {
         ...state,
         saving: true,
-        loadingSaved: false,
         loadingNew: false,
+        loadingSaved: false,
+        saved: false,
+        error: false,
       };
     case 'SAVE_MASH':
       const mashes =
