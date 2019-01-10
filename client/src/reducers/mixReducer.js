@@ -1,6 +1,6 @@
 const mixReducer = (
   state = {
-    data: [],
+    stories: [],
     loading: false,
   },
   action) => {
@@ -8,12 +8,13 @@ const mixReducer = (
     case 'START_FETCH_MIX':
       return {
         ...state,
+        stories: [],
         loading: true,
       };
     case 'FETCH_MIX':
       return {
         ...state,
-        data: action.payload,
+        stories: action.payload,
         loading: false,
       };
     default:

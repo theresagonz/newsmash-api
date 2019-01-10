@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import Search from '../components/Search';
 import { fetchMix, fetchMixSearch } from '../actions/mixActions';
 import Mix from '../components/Mix';
 
@@ -17,34 +16,34 @@ const PROPTYPES = {
   mix: PropTypes.shape({
     data: PropTypes.array,
     loading: PropTypes.bool,
-  }), 
+  }),
   fetchMixSearch: PropTypes.func,
 };
 
 class MixContainer extends Component {
   componentDidMount(prevProps) {
-    const searchTerm = this.props.match.params.topic;
-    if (searchTerm) {
-      this.props.fetchMixSearch(searchTerm);
-    } else {
-      this.props.fetchMix();
-    }
+    this.renderMix();
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      const searchTerm = this.props.match.params.topic;
-      if (searchTerm) {
-        this.props.fetchMixSearch(searchTerm);
-      } else {
-        this.props.fetchMix();
-      }
+      this.renderMix();
     }
+  }
+
+  renderMix() {
+    const searchTerm = this.props.match.params.topic;
+    const { fetchMixSearch, fetchMix } = this.props;
+    
+    searchTerm ? fetchMixSearch(searchTerm) : fetchMix();
   }
 
   render() {
     const slugifiedTopic = this.props.match.params.topic;
-    const headline = slugifiedTopic ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))} Mix` : 'Top Stories Mix';
+    const headline = slugifiedTopic
+      ? `${_.startCase(_.replace(slugifiedTopic, /-/g, ' '))} Mix`
+      : 'Top Stories Mix';
+
     return (
       <div className="mix-container main-content">
         <div className="headline">{headline}</div>
@@ -57,7 +56,10 @@ class MixContainer extends Component {
 MixContainer.propTypes = PROPTYPES;
 
 const mapStateToProps = state => {
-  return ({ mix: state.mix });
+  return { mix: state.mix };
 };
 
-export default connect(mapStateToProps, { fetchMix, fetchMixSearch })(MixContainer);
+export default connect(
+  mapStateToProps,
+  { fetchMix, fetchMixSearch }
+)(MixContainer);
