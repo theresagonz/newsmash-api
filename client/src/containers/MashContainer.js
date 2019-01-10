@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import SaveElement from '../components/SaveElement';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Mash from '../components/Mash';
+import SaveElement from '../components/SaveElement';
 import {
   getMashWords,
   getTopMash,
@@ -44,11 +44,20 @@ const PROPTYPES = {
 };
 
 class MashContainer extends Component {
+  componentDidMount() {
+    this.updateRenderedMash();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.updateRenderedMash();
+    }
+  }
+
   updateRenderedMash() {
     const { topic, id } = this.props.match.params;
     const { recentMashes } = this.props.mash;
     const { getMashWords, getSavedMash, getTopMash, setTopic } = this.props;
-
     if (topic) {
       setTopic(topic);
       getMashWords(topic);
@@ -63,31 +72,21 @@ class MashContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.updateRenderedMash();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.updateRenderedMash();
-    }
-  }
-
   render() {
     const {
+      topic,
+      words,
       loadingNew,
       loadingSaved,
       saving,
-      words,
-      topic,
-      error,
       saved,
+      error,
     } = this.props.mash;
     const { id } = this.props.match.params;
-    const { mash, recentMashes, saveMash, history, setSaved } = this.props;
-    
+    const { mash, recentMashes, saveMash, setSaved } = this.props;
+
     const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
-    
+
     let loadingMessage;
     if (loadingNew) {
       loadingMessage = 'Mashing up the news...';
@@ -97,25 +96,18 @@ class MashContainer extends Component {
       loadingMessage = 'Something is amiss. Please try again.';
     }
 
-    const mashDisplay = loadingMessage ? (
-      <div className="loading-message">{loadingMessage}</div>
-    ) : (
-      <Mash
-        {...{ topic, words, saving, id, mash, saveMash, history, recentMashes }}
-      />
-    );
-
+    let mashDisplay;
+    if (loadingMessage) {
+      mashDisplay = <div className="loading-message">{loadingMessage}</div>;
+    } else {
+      mashDisplay = <Mash words={words} />;
+    }
+    
     return (
       <div className="mash-container main-content">
         <div className="headline">{topicTitleCase}</div>
         <SaveElement
-          saving={saving}
-          id={id}
-          mash={mash}
-          saveMash={saveMash}
-          setSaved={setSaved}
-          saved={saved}
-          recentMashes={recentMashes}
+          {...{ id, mash, saving, saved, saveMash, setSaved, recentMashes }}
         />
         {mashDisplay}
         <div id="mash-canvas" />
