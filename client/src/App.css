@@ -103,7 +103,7 @@ a:active {
 .mix-headline {
   font-family: 'Zilla Slab', serif;
   font-size: 1.2em;
-  margin: 5px 0 0 0;
+  margin: -10px 0 0 0;
 }
 
 .mix-item {
@@ -128,8 +128,8 @@ a:active {
   font-size: 1.5em;
   font-family: 'Staatliches', sans-serif;
   position: absolute;
-  top: 20px;
-  right: 50px;
+  top: 65px;
+  right: 0;
 }
 
 .save-button {
@@ -145,6 +145,19 @@ a:active {
 .saved-label,
 .saving-label {
   color: rgb(213, 55, 58);
+}
+
+.toggle-button {
+  font-family: 'Staatliches', sans-serif;
+  font-size: 1.5em;
+  color: lightgrey;
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+
+.toggle-button:hover {
+  color: #007bff;
 }
 
 /* Spinner */
