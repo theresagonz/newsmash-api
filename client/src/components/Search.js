@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 const PROPTYPES = {
@@ -20,41 +19,39 @@ class Search extends Component {
 
   handleChange = event => {
     this.setState({
-      text: event.target.value
+      text: event.target.value,
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    // sets store state using search data in local component state
-    // this.props.getContent(this.state.text);
-    // this.searchRedirect();
-  }
+  };
 
   handleMashRequest = () => {
     this.props.history.push(`/mashes/${_.kebabCase(this.state.text)}`);
     this.setState({
-      text: ''
+      text: '',
     });
-  }
+  };
 
   handleMixRequest = () => {
     this.props.history.push(`/mixes/${_.kebabCase(this.state.text)}`);
     this.setState({
-      text: ''
+      text: '',
     });
-  }
+  };
 
   render() {
     return (
       <div>
-        <form className="form-inline" onSubmit={this.handleSubmit} >
+        <form className="form-inline" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input
               type="text"
               value={this.state.text}
               onChange={this.handleChange}
               className="form-control mr-sm-2"
+              autoFocus
             />
           </div>
           <input
