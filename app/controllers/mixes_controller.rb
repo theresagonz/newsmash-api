@@ -7,8 +7,8 @@ class MixesController < ApplicationController
   def getTopStories
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY'])
-    top_stories = newsapi.get_top_headlines(sources: Mix.default_sources, language: 'en', sortBy: 'relevancy')
-    # mix = Mix.new(top_stories)
+    top_stories = newsapi.get_top_headlines(sources: Mix.default_sources, language: 'en', pageSize: 40)
+
     render json: top_stories
   end
 
@@ -19,7 +19,7 @@ class MixesController < ApplicationController
     all_stories = newsapi.get_everything(q: searchTerm, sources: Mix.default_sources, language: 'en', sortBy: 'relevancy', pageSize: 40)
     # exclude nytimes 'briefings'
     filtered_stories = all_stories.select {|story| !story.title.include? "Briefing" } 
-    # filtered_stories = all_stories.collect {|story| }
+
     render json: filtered_stories
   end
 end

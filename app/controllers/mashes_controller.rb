@@ -40,7 +40,7 @@ class MashesController < ApplicationController
 
     if response.status == 200
       # Render formatted mash data at api endpoint
-      mash = Mash.new(topic: 'top stories', words: JSON.parse(response.body)['keywords'].take(33))
+      mash = Mash.new(topic: 'top stories', words: JSON.parse(response.body)['keywords'].take(40))
       render json: mash
     else
       # Render string at api endpoint
@@ -62,9 +62,9 @@ class MashesController < ApplicationController
       req.params['api_key'] = ENV['TEXT_ANALYSIS_API_KEY']
       req.params['text'] = text
     end
-    
+
     if response.status == 200
-      mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'])
+      mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'].take(40))
       render json: mash
     else
       render json: text
