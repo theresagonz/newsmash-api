@@ -16,7 +16,7 @@ export default function LoadingSpinner() {
           <div className="lading" />
         </div>
       </div>
-      <span class="sr-only">Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }
