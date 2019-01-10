@@ -7,10 +7,12 @@ import SaveElement from '../components/SaveElement';
 import {
   getMashWords,
   getTopMash,
+  getRecentMashes,
   saveMash,
-  getSavedMash,
+  getOlderSavedMash,
   setTopic,
   setSaved,
+  setRecentMash,
 } from '../actions/mashActions';
 
 const PROPTYPES = {
@@ -37,8 +39,10 @@ const PROPTYPES = {
   }),
   getMashWords: PropTypes.func,
   getTopMash: PropTypes.func,
+  getRecentMashes: PropTypes.func,
   saveMash: PropTypes.func,
-  getSavedMash: PropTypes.func,
+  getOlderSavedMash: PropTypes.func,
+  setRecentMash: PropTypes.func,
   setTopic: PropTypes.func,
   setSaved: PropTypes.func,
 };
@@ -57,18 +61,34 @@ class MashContainer extends Component {
   updateRenderedMash() {
     const { topic, id } = this.props.match.params;
     const { recentMashes } = this.props.mash;
-    const { getMashWords, getSavedMash, getTopMash, setTopic } = this.props;
+    const { getTopMash, setTopic } = this.props;
     if (topic) {
-      setTopic(topic);
-      getMashWords(topic);
+      this.getMashByTopic(topic);
     } else if (id) {
-      const recentMash = recentMashes.find(mash => mash.id === parseInt(id));
-      const topic = recentMash ? recentMash.topic : 'Loading saved';
-      setTopic(topic);
-      getSavedMash(id);
+      this.getMashById(id);
     } else {
       setTopic('Top Stories');
       getTopMash();
+    }
+  }
+
+  getMashByTopic(topic) {
+    this.props.setTopic(topic);
+    this.props.getMashWords(topic);
+  }
+
+  async getMashById(id) {
+    await this.props.getRecentMashes();
+    
+    const { recentMashes, setTopic, setRecentMash, getOlderSavedMash } = this.props;
+    const recentMash = recentMashes.find(mash => mash.id === parseInt(id));
+
+    if (recentMash) {
+      setTopic(recentMash.topic);
+      setRecentMash(recentMash);
+    } else {
+      setTopic('Loading saved');
+      getOlderSavedMash(id);
     }
   }
 
@@ -85,13 +105,13 @@ class MashContainer extends Component {
     const { id } = this.props.match.params;
     const { mash, recentMashes, saveMash, setSaved } = this.props;
 
-    const topicTitleCase = `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`;
+    const topicTitleCase = topic ? `${_.startCase(_.replace(topic, /-/g, ' '))} Mash` : 'Just a moment...';
 
     let loadingMessage;
     if (loadingNew) {
       loadingMessage = 'Mashing up the news...';
     } else if (loadingSaved) {
-      loadingMessage = 'Please wait...';
+      loadingMessage = 'Loading saved mash';
     } else if (error) {
       loadingMessage = 'Something is amiss. Please try again.';
     }
@@ -124,5 +144,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getMashWords, getTopMash, saveMash, getSavedMash, setTopic, setSaved }
+  { getMashWords, getTopMash, getRecentMashes, saveMash, getOlderSavedMash, setRecentMash, setTopic, setSaved }
 )(MashContainer);

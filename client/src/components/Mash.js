@@ -51,14 +51,15 @@ const mashConfig = words => {
 
 export default class Mash extends Component {
   render() {
-    if (this.props.words.length) {
+    const { words } = this.props;
+    if (words && words.length) {
       return (
         <div>
           <WordMash
             id="mash-canvas"
             height="400"
             width="100%"
-            data={mashConfig(this.props.words)}
+            data={mashConfig(words)}
           />
         </div>
       );

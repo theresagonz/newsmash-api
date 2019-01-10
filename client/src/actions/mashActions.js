@@ -83,7 +83,7 @@ export const getRecentMashes = () => {
   };
 };
 
-export const getSavedMash = id => {
+export const getOlderSavedMash = (id) => {
   return dispatch => {
     dispatch({ type: 'START_FETCH_SAVED_MASH' });
     return fetch(`/api/v1/mashes/${id}`)
@@ -95,6 +95,16 @@ export const getSavedMash = id => {
         });
       })
       .catch(error => console.error(error));
+  };
+};
+
+export const setRecentMash = mash => {
+  return dispatch => {
+    dispatch({ type: 'START_SET_RECENT_MASH', payload: mash.topic });
+    dispatch({
+      type: 'SET_RECENT_MASH',
+      payload: mash.words,
+    });
   };
 };
 

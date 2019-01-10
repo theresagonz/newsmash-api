@@ -25,7 +25,6 @@ const mashReducer = (
     case 'FETCH_MASH':
       return {
         ...state,
-        id: action.payload.id,
         topic: action.payload.topic,
         words: action.payload.words,
         loadingNew: false,
@@ -34,6 +33,7 @@ const mashReducer = (
     case 'START_FETCH_SAVED_MASH':
       return {
         ...state,
+        topic: action.payload,
         words: [],
         loadingNew: false,
         loadingSaved: true,
@@ -65,7 +65,22 @@ const mashReducer = (
       return {
         ...state,
         recentMashes: action.payload,
+      };
+    case 'START_SET_RECENT_MASH':
+      return {
+        ...state,
+        topic: action.payload,
         loadingNew: false,
+        loadingSaved: false,
+        saving: false,
+        saved: false,
+        error: false,
+      };
+    case 'SET_RECENT_MASH':
+      return {
+        ...state,
+        words: action.payload,
+        error: false,
       };
     case 'SET_TOPIC':
       return {
