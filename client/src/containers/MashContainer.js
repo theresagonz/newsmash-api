@@ -24,9 +24,8 @@ const PROPTYPES = {
         count: PropTypes.number,
       })
     ),
-    loadingNew: PropTypes.bool,
     topic: PropTypes.string,
-    loadingSaved: PropTypes.bool,
+    loading: PropTypes.bool,
     saving: PropTypes.bool,
     saved: PropTypes.bool,
     error: PropTypes.bool,
@@ -87,8 +86,7 @@ class MashContainer extends Component {
     const {
       topic,
       words,
-      loadingNew,
-      loadingSaved,
+      loading,
       saving,
       saved,
       error,
@@ -101,7 +99,7 @@ class MashContainer extends Component {
       : 'Just a moment...';
 
     let mashDisplay;
-    if (loadingNew || loadingSaved) {
+    if (loading) {
       mashDisplay = <LoadingSpinner />;
     } else if (error) {
       mashDisplay = (

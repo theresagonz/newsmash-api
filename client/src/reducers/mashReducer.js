@@ -3,8 +3,7 @@ const mashReducer = (
     topic: '',
     words: [],
     recentMashes: [],
-    loadingNew: false,
-    loadingSaved: false,
+    loading: false,
     saving: false,
     saved: false,
     error: false,
@@ -16,8 +15,7 @@ const mashReducer = (
       return {
         ...state,
         words: [],
-        loadingNew: true,
-        loadingSaved: false,
+        loading: true,
         saving: false,
         saved: false,
         error: false,
@@ -27,16 +25,14 @@ const mashReducer = (
         ...state,
         topic: action.payload.topic,
         words: action.payload.words,
-        loadingNew: false,
-        loadingSaved: false,
+        loading: false,
       };
     case 'START_FETCH_SAVED_MASH':
       return {
         ...state,
         topic: action.payload,
         words: [],
-        loadingNew: false,
-        loadingSaved: true,
+        loading: true,
         saving: false,
         saved: false,
         error: false,
@@ -45,8 +41,7 @@ const mashReducer = (
       return {
         ...state,
         saving: true,
-        loadingNew: false,
-        loadingSaved: false,
+        loading: false,
         saved: false,
         error: false,
       };
@@ -70,8 +65,7 @@ const mashReducer = (
       return {
         ...state,
         topic: action.payload,
-        loadingNew: false,
-        loadingSaved: false,
+        loading: false,
         saving: false,
         saved: false,
         error: false,
@@ -95,7 +89,7 @@ const mashReducer = (
     case 'SET_ERROR':
       return {
         ...state,
-        loadingNew: false,
+        loading: false,
         saved: false,
         error: true,
       };
