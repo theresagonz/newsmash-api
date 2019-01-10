@@ -10,7 +10,6 @@ import {
   getRecentMashes,
   saveMash,
   getOlderSavedMash,
-  setTopic,
   setSaved,
   setRecentMash,
 } from '../actions/mashActions';
@@ -43,7 +42,6 @@ const PROPTYPES = {
   saveMash: PropTypes.func,
   getOlderSavedMash: PropTypes.func,
   setRecentMash: PropTypes.func,
-  setTopic: PropTypes.func,
   setSaved: PropTypes.func,
 };
 
@@ -60,34 +58,25 @@ class MashContainer extends Component {
 
   updateRenderedMash() {
     const { topic, id } = this.props.match.params;
-    const { recentMashes } = this.props.mash;
-    const { getTopMash, setTopic } = this.props;
+    const { getTopMash, getMashWords } = this.props;
     if (topic) {
-      this.getMashByTopic(topic);
+      getMashWords(topic);
     } else if (id) {
       this.getMashById(id);
     } else {
-      setTopic('Top Stories');
       getTopMash();
     }
   }
 
-  getMashByTopic(topic) {
-    this.props.setTopic(topic);
-    this.props.getMashWords(topic);
-  }
-
   async getMashById(id) {
     await this.props.getRecentMashes();
-    
-    const { recentMashes, setTopic, setRecentMash, getOlderSavedMash } = this.props;
+
+    const { recentMashes, setRecentMash, getOlderSavedMash } = this.props;
     const recentMash = recentMashes.find(mash => mash.id === parseInt(id));
 
     if (recentMash) {
-      setTopic(recentMash.topic);
       setRecentMash(recentMash);
     } else {
-      setTopic('Loading saved');
       getOlderSavedMash(id);
     }
   }
@@ -105,7 +94,9 @@ class MashContainer extends Component {
     const { id } = this.props.match.params;
     const { mash, recentMashes, saveMash, setSaved } = this.props;
 
-    const topicTitleCase = topic ? `${_.startCase(_.replace(topic, /-/g, ' '))} Mash` : 'Just a moment...';
+    const topicTitleCase = topic
+      ? `${_.startCase(_.replace(topic, /-/g, ' '))} Mash`
+      : 'Just a moment...';
 
     let loadingMessage;
     if (loadingNew) {
@@ -122,7 +113,7 @@ class MashContainer extends Component {
     } else {
       mashDisplay = <Mash words={words} />;
     }
-    
+
     return (
       <div className="mash-container main-content">
         <div className="headline">{topicTitleCase}</div>
@@ -144,5 +135,13 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getMashWords, getTopMash, getRecentMashes, saveMash, getOlderSavedMash, setRecentMash, setTopic, setSaved }
+  {
+    getMashWords,
+    getTopMash,
+    getRecentMashes,
+    saveMash,
+    getOlderSavedMash,
+    setRecentMash,
+    setSaved,
+  }
 )(MashContainer);
