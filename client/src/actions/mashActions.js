@@ -1,14 +1,13 @@
-export const getMashWords = (text) => {
-  console.log('text :', text);
+export const getMashWords = text => {
   const request = {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(text)
+    body: JSON.stringify(text),
   };
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/data', request)
       .then(res => res.json())
@@ -28,7 +27,7 @@ export const getMashWords = (text) => {
 };
 
 export const getTopMash = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({ type: 'START_FETCH_MASH' });
     return fetch('/api/v1/mashes/data')
       .then(res => res.json())
@@ -47,32 +46,31 @@ export const getTopMash = () => {
   };
 };
 
-export const saveMash = (data) => {
-  console.log('DATA', data)
+export const saveMash = data => {
   const request = {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
-  };  
-  return (dispatch) => {
-    dispatch({ type: 'START_SAVE_MASH'});
+    body: JSON.stringify(data),
+  };
+  return dispatch => {
+    dispatch({ type: 'START_SAVE_MASH' });
     return fetch('/api/v1/mashes', request)
-    .then(res => res.json())
-    .then(data => {
-      dispatch({
-        type: 'SAVE_MASH',
-        payload: data,
-      });
-    })
-    .catch(error => console.error(error));
+      .then(res => res.json())
+      .then(data => {
+        dispatch({
+          type: 'SAVE_MASH',
+          payload: data,
+        });
+      })
+      .catch(error => console.error(error));
   };
 };
 
 export const getRecentMashes = () => {
-  return (dispatch) => {
+  return dispatch => {
     return fetch('/api/v1/mashes/recent')
       .then(res => res.json())
       .then(data => {
@@ -85,9 +83,9 @@ export const getRecentMashes = () => {
   };
 };
 
-export const getSavedMash = (id) => {
-  return (dispatch) => {
-    dispatch({ type: 'START_FETCH_SAVED_MASH'});
+export const getSavedMash = id => {
+  return dispatch => {
+    dispatch({ type: 'START_FETCH_SAVED_MASH' });
     return fetch(`/api/v1/mashes/${id}`)
       .then(res => res.json())
       .then(data => {
@@ -100,8 +98,8 @@ export const getSavedMash = (id) => {
   };
 };
 
-export const setTopic = (topic) => {
-  return (dispatch) => {
+export const setTopic = topic => {
+  return dispatch => {
     dispatch({
       type: 'SET_TOPIC',
       payload: topic,
@@ -110,7 +108,7 @@ export const setTopic = (topic) => {
 };
 
 export const setSaved = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: 'SET_SAVED',
     });
@@ -118,7 +116,7 @@ export const setSaved = () => {
 };
 
 export const setError = () => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: 'SET_ERROR',
     });

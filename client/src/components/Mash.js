@@ -7,6 +7,7 @@ const PROPTYPES = {
     PropTypes.shape({
       text: PropTypes.string,
       count: PropTypes.number,
+      url: PropTypes.string,
     })
   ),
 };

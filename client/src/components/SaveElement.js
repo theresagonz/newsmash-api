@@ -2,8 +2,7 @@ import React from 'react';
 import history from './history';
 
 export default function SaveElement(props) {
-  const { saving, id, mash, saveMash, setSaved, saved, recentMashes } = props;
-
+  const { id, mash, saving, saved, saveMash, setSaved } = props;
   const handleClick = async () => {
     await saveMash(mash);
     history.push(`/mashes/saved/${props.recentMashes[0].id}`);
