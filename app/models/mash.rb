@@ -19,10 +19,10 @@ class Mash < ApplicationRecord
     text = data.map do |story|
       description = story.description
       # Add punctuation for better analytics
-        if description[-1,1] != '.' && description[-1,1] != '?' && description[-1,1] != '…'
+        if description && description[-1,1] != '.' && description[-1,1] != '?' && description[-1,1] != '…'
           description + '.'
         else
-          description
+          description ? description : ''
         end
     end.join(' ')
     
