@@ -18,7 +18,7 @@ class MashesController < ApplicationController
     if @mash.save
       render json: @mash.to_json
     else
-      render json: @mash.errors
+      render status: 404, json: @mash.errors
     end
   end
 

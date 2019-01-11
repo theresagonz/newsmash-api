@@ -60,6 +60,7 @@ export const saveMash = data => {
   return dispatch => {
     dispatch({ type: 'START_SAVE_MASH' });
     return fetch('/api/v1/mashes', request)
+      .then(res => res.ok ? res : new Error(res))
       .then(res => res.json())
       .then(data => {
         dispatch({
