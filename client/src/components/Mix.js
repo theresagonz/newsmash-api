@@ -2,7 +2,7 @@ import React from 'react';
 import MixItem from './MixItem';
 import LoadingSpinner from './LoadingSpinner';
 
-const Stories = props => {
+const Mix = props => {
   const { stories, loading } = props.mix;
 
   let mixDisplay;
@@ -31,4 +31,4 @@ const Stories = props => {
   return <div>{mixDisplay}</div>;
 };
 
-export default Stories;
+export default Mix;

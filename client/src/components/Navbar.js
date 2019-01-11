@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import Search from './Search';
+import Search from '../containers/Search';
 import { fetchMixSearch } from '../actions/mixActions';
 import { getMashWords } from '../actions/mashActions';
 
