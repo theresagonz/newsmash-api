@@ -124,27 +124,29 @@ a:active {
   font-family: 'Roboto', sans-serif;
 }
 
-.heart-shape {
+.star {
   font-size: 1.5em;
   font-family: 'Staatliches', sans-serif;
   position: absolute;
-  top: 65px;
+  top: 60px;
   right: 0;
 }
 
 .save-button {
-  color: rgb(27, 27, 27);
   cursor: pointer;
   color: lightgrey;
 }
 
-.hover-div:hover {
-  color: rgb(213, 55, 58);
+.save-button:hover {
+  color: rgba(233, 212, 53, 0.974);
 }
 
-.saved-label,
 .saving-label {
-  color: rgb(213, 55, 58);
+  color: rgba(233, 212, 53, 0.974);
+}
+
+.saved-label {
+  color: darkgrey;
 }
 
 .toggle-button {
@@ -158,6 +160,15 @@ a:active {
 
 .toggle-button:hover {
   color: #007bff;
+}
+
+.like-button {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.like-button:hover {
+  color: #af2326;
 }
 
 /* Spinner */

@@ -12,14 +12,14 @@ export default function SaveElement(props) {
   let saveElement;
   if (saving) {
     saveElement = (
-      <div className="heart-shape saving-label">&hearts; Saving</div>
+      <div className="star saving-label">&&#9733; Saving</div>
     );
   } else if (id || saved) {
-    saveElement = <div className="heart-shape saved-label">&hearts; Saved</div>;
+    saveElement = <div className="star saved-label">&#9733; Saved</div>;
   } else {
     saveElement = (
-      <div className="heart-shape save-button hover-div" onClick={handleClick}>
-        &hearts; Save
+      <div className="star save-button" onClick={handleClick}>
+        &#9733; Save
       </div>
     );
   }
