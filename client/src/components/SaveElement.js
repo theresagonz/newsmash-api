@@ -12,7 +12,7 @@ export default function SaveElement(props) {
   let saveElement;
   if (saving) {
     saveElement = (
-      <div className="star saving-label">&&#9733; Saving</div>
+      <div className="star saving-label">&#9733; Saving</div>
     );
   } else if (id || saved) {
     saveElement = <div className="star saved-label">&#9733; Saved</div>;
