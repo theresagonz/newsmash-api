@@ -45,17 +45,13 @@ const mashReducer = (
         saved: false,
         error: false,
       };
-    case 'SAVE_MASH':
-      const mashes =
-        state.recentMashes.length < 5
-          ? [action.payload, ...state.recentMashes]
-          : [action.payload, ...state.recentMashes.slice(0, 9)];
+    case 'COMPLETE_SAVE':
       return {
         ...state,
         saving: false,
         saved: true,
-        recentMashes: mashes,
       };
+
     case 'FETCH_RECENT_MASH_LIST':
       return {
         ...state,
