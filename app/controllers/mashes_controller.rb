@@ -22,13 +22,13 @@ class MashesController < ApplicationController
     end
   end
 
-  def getTopMashWords
+  def get_top_mash_words
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY']);
     stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', pageSize: 30)
 
     # Combine descriptions into one string
-    text = Mash.getMashString(stories)
+    text = Mash.get_mash_string(stories)
 
     # Request keyword analytics from Parallel Dots API
     conn = Faraday.new(url: 'https://apis.paralleldots.com/v3/keywords')
@@ -48,13 +48,13 @@ class MashesController < ApplicationController
     end
   end
   
-  def getSearchMashWords
-    searchTerm = params['_json']
+  def get_search_mash_words
+    search_term = params['_json']
 
     newsapi = News.new(ENV['NEWS_API_KEY']);
-    stories = newsapi.get_everything(q: searchTerm, sources: Mash.default_sources, language: 'en', sortBy: 'relevancy', pageSize: 30)
+    stories = newsapi.get_everything(q: search_term, sources: Mash.default_sources, language: 'en', sortBy: 'relevancy', pageSize: 30)
 
-    text = Mash.getMashString(stories)
+    text = Mash.get_mash_string(stories)
 
     conn = Faraday.new(url: 'https://apis.paralleldots.com/v3/keywords')
     response = conn.post do |req|
@@ -64,17 +64,16 @@ class MashesController < ApplicationController
     end
 
     if response.status == 200
-      mash = Mash.new(topic: searchTerm, words: JSON.parse(response.body)['keywords'].take(40))
+      mash = Mash.new(topic: search_term, words: JSON.parse(response.body)['keywords'].take(40))
       render json: mash
     else
       render json: text
     end
   end
 
-  def getRecentMashes
+  def get_recent_mashes
     length = Mash.all.length
-    @mashes = length < 10 ? Mash.all[-length, length].reverse
-    : Mash.all[-10, 10].reverse
+    @mashes = length < 10 ? Mash.all[-length, length].reverse : Mash.all[-10, 10]
     render json: @mashes
   end
 
