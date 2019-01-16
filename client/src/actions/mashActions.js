@@ -60,15 +60,20 @@ export const saveMash = data => {
   return dispatch => {
     dispatch({ type: 'START_SAVE_MASH' });
     return fetch('/api/v1/mashes', request)
-      .then(res => res.ok ? res : new Error(res))
+      .then(res => (res.ok ? res : new Error(res)))
       .then(res => res.json())
       .then(data => {
-        dispatch({
-          type: 'SAVE_MASH',
-          payload: data,
-        });
-      })
-      .catch(error => console.error(error));
+        dispatch({ type: 'COMPLETE_SAVE' });
+        return fetch('/api/v1/mashes/recent')
+          .then(res => res.json())
+          .then(data => {
+            dispatch({
+              type: 'FETCH_RECENT_MASH_LIST',
+              payload: data,
+            });
+          })
+          .catch(error => console.error(error));
+      });
   };
 };
 
