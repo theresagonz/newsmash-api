@@ -15,7 +15,7 @@ class Mash < ApplicationRecord
       .gsub('\'s', '')
   end
 
-  def self.getMashString(data)
+  def self.get_mash_string(data)
     text = data.map do |story|
       description = story.description
       # Add punctuation for better analytics
