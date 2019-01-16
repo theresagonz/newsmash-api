@@ -72,7 +72,9 @@ class MashesController < ApplicationController
   end
 
   def getRecentMashes
-    @mashes = Mash.all[-10, 10].reverse
+    length = Mash.all.length
+    @mashes = length < 10 ? Mash.all[-length, length].reverse
+    : Mash.all[-10, 10].reverse
     render json: @mashes
   end
 
