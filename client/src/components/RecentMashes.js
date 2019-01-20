@@ -1,9 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import _ from 'lodash';
+import MashLink from './MashLink';
 
 class RecentMashes extends React.Component {
-  state = {};
+  constructor() {
+    super();
+
+    this.state = {
+      recentMashes: [],
+    };
+  }
 
   handleClick = id => {
     this.setState({
@@ -12,24 +17,13 @@ class RecentMashes extends React.Component {
   };
 
   render() {
-    const savedMashLinks = this.props.recentMashes
-      ? this.props.recentMashes.map(mash => {
-          const path = `/mashes/saved/${mash.id}`;
-          const topicTitleCase = _.startCase(_.replace(mash.topic, /-/g, ' '));
-          return (
-            <div key={mash.id} className="sidebar-link">
-              <Link to={path}>{topicTitleCase}</Link>
-              <span
-                className="like-button"
-                onClick={() => this.handleClick(mash.id)}
-              >
-                &hearts;
-              </span>
-              <span>{this.state[mash.id] || 0}</span>
-            </div>
-          );
-        })
-      : null;
+    const mashes =
+      this.state.recentMashes.length === 0
+        ? this.props.recentMashes
+        : this.state.recentMashes;
+    const savedMashLinks = mashes.map(mash => (
+      <MashLink mash={mash} />
+    ));
 
     return (
       <div className="sidebar-container">
