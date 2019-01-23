@@ -1,12 +1,12 @@
 import React from 'react';
 import MashLink from './MashLink';
 
-const RecentMashes = props => { 
+const RecentMashes = props => {
   return (
     <div className="sidebar-container">
       <div className="sidebar-heading">Saved Mashes</div>
       {props.recentMashes.map(mash => (
-        <MashLink mash={mash} />
+        <MashLink key={mash.id} mash={mash} />
       ))}
     </div>
   );
