@@ -6,6 +6,7 @@ import _ from 'lodash';
 import Mash from '../components/Mash';
 import SaveElement from '../components/SaveElement';
 import LoadingSpinner from '../components/LoadingSpinner';
+import MySidebar from './MySidebar';
 import {
   getMashWords,
   getTopMash,
@@ -118,6 +119,7 @@ class MashContainer extends Component {
     
     return (
       <div className="mash-container main-content">
+        <MySidebar />
         <div className="headline">{topicTitleCase}</div>
         <SaveElement
           {...{ id, mash, saving, saved, saveMash, setSaved, recentMashes }}

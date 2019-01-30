@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-import Sidebar from './containers/Sidebar';
+import Sidebar from './containers/MySidebar';
 import MixContainer from './containers/MixContainer';
 import MashContainer from './containers/MashContainer';
 import RoutingError from './components/RoutingError';
@@ -13,7 +13,7 @@ const App = () => {
     <Router>
       <React.Fragment>
           <Route path="/" component={Navbar} />
-          <Route path="/" component={Sidebar} />
+          {/* <Route path="/" component={Sidebar} /> */}
           <ErrorBoundary>
             <Switch>
               <Route exact path="/" component={MashContainer} />

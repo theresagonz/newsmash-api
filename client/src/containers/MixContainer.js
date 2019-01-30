@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { fetchMix, fetchMixSearch } from '../actions/mixActions';
 import Mix from '../components/Mix';
+import MySidebar from './MySidebar';
 
 const PROPTYPES = {
   fetchMix: PropTypes.func,
@@ -48,6 +49,7 @@ class MixContainer extends Component {
 
     return (
       <div className="mix-container main-content">
+      <MySidebar />
         <div className="headline">{headline}</div>
         <Mix mix={this.props.mix} />
         <Link to={`/mashes/${mashLink}`} className="toggle-button">
