@@ -17,7 +17,7 @@ class MySidebar extends Component {
   onSetSidebarOpen = () => {
     // let toggleOpen = ;
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
-  }
+  };
 
   componentDidMount() {
     this.props.getRecentMashes();
@@ -27,7 +27,7 @@ class MySidebar extends Component {
     return (
       <Sidebar
         sidebar={
-          <div>
+          <div className="sidebar">
             <TopLinks />
             <RecentMashes recentMashes={this.props.recentMashes} />
           </div>
@@ -36,8 +36,10 @@ class MySidebar extends Component {
         onSetOpen={this.onSetSidebarOpen}
         styles={{ sidebar: { background: 'white' } }}
       >
-        <button onClick={ this.onSetSidebarOpen}>
-          Open sidebar
+        <button className="hamburger hamburger--spin" type="button" onClick={this.onSetSidebarOpen}>
+          <span className="hamburger-box toggle-sidebar-btn">
+            <span className="hamburger-inner"></span>
+          </span>
         </button>
       </Sidebar>
     );

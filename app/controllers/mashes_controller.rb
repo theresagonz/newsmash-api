@@ -52,7 +52,7 @@ class MashesController < ApplicationController
     search_term = params['_json']
 
     newsapi = News.new(ENV['NEWS_API_KEY']);
-    stories = newsapi.get_everything(q: search_term, sources: Mash.default_sources, language: 'en', sortBy: 'relevancy', pageSize: 30)
+    stories = newsapi.get_everything(q: search_term, sources: Mash.default_sources, language: 'en', sortBy: 'publishedAt', pageSize: 30)
 
     text = Mash.get_mash_string(stories)
 

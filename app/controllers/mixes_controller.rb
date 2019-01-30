@@ -16,7 +16,7 @@ class MixesController < ApplicationController
     search_term = params['_json']
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY'])
-    all_stories = newsapi.get_everything(q: search_term, sources: Mix.default_sources, language: 'en', sortBy: 'relevancy', pageSize: 40)
+    all_stories = newsapi.get_everything(q: search_term, sources: Mix.default_sources, language: 'en', sortBy: 'publishedAt', pageSize: 40)
     # exclude nytimes 'briefings'
     filtered_stories = all_stories.select {|story| !story.title.include? "Briefing" } 
 
