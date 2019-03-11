@@ -4,12 +4,14 @@ Rails.application.routes.draw do
 
   scope :api do
     scope :v1 do
-      get '/mixes/data', to: 'mixes#get_top_stories'
-      post '/mixes/data', to: 'mixes#get_search_stories'
+      get '/mixes/new', to: 'mixes#get_top_stories_mix'
+      post '/mixes/new', to: 'mixes#get_search_mix'
 
-      get '/mashes/data', to: 'mashes#get_top_mash_words'
-      post '/mashes/data', to: 'mashes#get_search_mash_words'
-      get '/mashes/recent', to: 'mashes#get_recent_mashes'
+      get '/mashes/new', to: 'mashes#get_top_stories_mash'
+      post '/mashes/new', to: 'mashes#get_search_mash'
+
+      get '/mashes/recent', to: 'mashes#get_recent_saved_mashes'
+      
       resources :mashes, only: [:index, :show, :create]
     end
   end

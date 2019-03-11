@@ -22,7 +22,7 @@ class MashesController < ApplicationController
     end
   end
 
-  def get_top_mash_words
+  def get_top_stories_mash
     # Get data using News API's library
     newsapi = News.new(ENV['NEWS_API_KEY']);
     stories = newsapi.get_top_headlines(sources: Mash.default_sources, language: 'en', pageSize: 30)
@@ -48,7 +48,7 @@ class MashesController < ApplicationController
     end
   end
   
-  def get_search_mash_words
+  def get_search_mash
     search_term = params['_json']
 
     newsapi = News.new(ENV['NEWS_API_KEY']);
@@ -71,7 +71,7 @@ class MashesController < ApplicationController
     end
   end
 
-  def get_recent_mashes
+  def get_recent_saved_mashes
     length = Mash.all.length
     @mashes = length < 10 ? Mash.all[-length, length].reverse : Mash.all[-10, 10]
     render json: @mashes
